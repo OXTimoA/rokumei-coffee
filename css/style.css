@@ -31,6 +31,10 @@
   --section-title-size: 1.25rem;
   --section-title-weight: 700;
   --section-title-spacing: 0.1em;
+
+  /* Sticky Header heights - Approximate based on font size + padding */
+  --utility-bar-height-pc: 40px;
+  --utility-bar-height-sp: 32px;
 }
 
 /* ============================================
@@ -100,8 +104,18 @@ ul {
 .utility-bar {
   background-color: #F5F5F5;
   border-bottom: 1px solid var(--border-gray);
-  padding: 0.5rem 0;
+  padding: 0;
+  /* Removing padding to use flex alignment and fixed height */
+  height: var(--utility-bar-height-pc);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: var(--font-size-xs);
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  /* Higher than header (1001) */
+  width: 100%;
 }
 
 .utility-text {
@@ -127,7 +141,7 @@ ul {
 
 @media (max-width: 767px) {
   .utility-bar {
-    padding: 0.4rem 0;
+    height: var(--utility-bar-height-sp);
   }
 
   .utility-text {
@@ -212,9 +226,10 @@ ul {
 .hero-progress-line .progress-bar {
   display: block;
   width: 100%;
-  height: 0%;
+  /* Height and top are controlled by JS */
   background-color: #FFFFFF;
-  transition: height 3s linear;
+  position: absolute;
+  left: 0;
 }
 
 /* Hero Header/Navbar */
@@ -253,6 +268,8 @@ ul {
 /* Sticky Header State */
 .site-header.scrolled {
   position: fixed;
+  /* Top is dynamic based on viewport width (pc vs sp) */
+  top: var(--utility-bar-height-pc);
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   padding: var(--spacing-xs) 0;
@@ -415,20 +432,30 @@ ul {
   text-align: left;
 }
 
-.hero-description {
-  font-size: 1rem;
-  font-weight: 500;
+
+.hero-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
   margin-bottom: 0.25rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-.hero-subtitle {
+.hero-description {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 100%;
+  margin-bottom: 0.25rem;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+/* .hero-subtitle {
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 2rem;
   line-height: 1.4;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-}
+} */
 
 .hero-cta {
   display: inline-block;
@@ -442,49 +469,66 @@ ul {
   transition: opacity 0.3s;
 }
 
-.hero-cta:hover {
-  opacity: 0.8;
+.hero-cta {
+  display: inline-block;
+  color: var(--bg-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  position: relative;
+  /* padding-bottom: 25px; Increased padding to fit the new arrow below */
+  letter-spacing: 0.05em;
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
+.hero-cta:hover {
+  opacity: 1;
+  /* Keep opacity fully visible, we animate children */
+}
+
+/* Hide the old line */
 .cta-line {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200px;
-  height: 1px;
-  background-color: var(--bg-white);
-  transition: width 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  display: none;
 }
 
 .cta-arrow {
-  position: absolute;
-  bottom: -3px;
-  left: 20px;
-  /* Start position */
-  width: 12px;
-  height: auto;
-  opacity: 0;
-  transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  position: relative;
+  margin-top: 0px;
+  /* Reduced margin to bring text near arrow */
+  /* Remove old absolute positioning */
+  left: auto;
+  bottom: auto;
+  opacity: 1;
   pointer-events: none;
-}
 
-.hero-cta:hover .cta-line {
-  width: 260px;
+  /* Initial State: Hidden via clip-path (clipped from right to left) */
+  /* We want reveal FROM left TO right. So we start with inset(0 100% 0 0) - full right clip */
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  /* Specific Dimensions */
+  width: 240px;
+  height: 8px;
+
+  /* Border as requested */
+  /* border: 1px solid currentColor; */
+  /* Using text color (white) */
+
+  object-fit: cover;
+  /* Ensure image fills the exact dimensions */
 }
 
 .hero-cta:hover .cta-arrow {
+  /* Reveal State: No clip */
+  clip-path: inset(0 0 0 0);
   opacity: 1;
-  left: 254px;
-  /* Move to end of expanded line */
 }
 
 .hero-cta .arrow {
   display: none;
   /* Hide the img arrow as we use CSS */
-}
-
-.hero-cta:hover {
-  opacity: 0.8;
 }
 
 
@@ -494,6 +538,20 @@ ul {
   bottom: 1.5rem;
   right: 1.5rem;
   z-index: 10;
+}
+
+.hero-badge-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  /* Estimated size of the cross icon area */
+  height: 30px;
+  cursor: pointer;
+  z-index: 20;
+  /* Above the link */
+  background-color: transparent;
+  /* Invisible hotpost */
 }
 
 .hero-badge img {
@@ -591,19 +649,17 @@ ul {
     font-size: 0.75rem;
   }
 
-  .cta-line {
-    width: 150px;
-  }
+  /* .cta-line { width: 150px; } - Removed */
 
-  .hero-cta:hover .cta-line {
-    width: 180px;
-  }
+  /* .hero-cta:hover .cta-line { width: 180px; } - Removed */
 
-  .hero-cta:hover .cta-arrow {
-    left: 174px;
-  }
+  /* .hero-cta:hover .cta-arrow { left: 174px; } - Removed */
 
   /* Center black logo on mobile scrolled state */
+  .site-header.scrolled {
+    top: var(--utility-bar-height-sp);
+  }
+
   .site-header.scrolled .hero-header-inner {
     justify-content: center;
     position: relative;
@@ -975,19 +1031,41 @@ ul {
 /* ============================================ 
    Campaign Section
    ============================================ */
+.campaign {
+  width: 1280px;
+  height: 799px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 767px) {
+  .campaign {
+    width: 375px;
+    height: 774px;
+  }
+}
+
 .campaign-carousel {
-  position: relative;
   width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .campaign-carousel-inner {
+  width: 100%;
+  flex: 1;
+  /* Take available space */
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  overflow: hidden;
 }
 
 .campaign-slider-wrapper {
-  flex: 1;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   position: relative;
   cursor: grab;
@@ -999,6 +1077,7 @@ ul {
 
 .campaign-slider {
   display: flex;
+  height: 100%;
   transition: transform 0.5s ease-in-out;
   will-change: transform;
 }
@@ -1006,41 +1085,72 @@ ul {
 .campaign-item {
   flex: 0 0 calc(100% / 3);
   width: calc(100% / 3);
+  height: 100%;
+  /* Force full height of the slider area */
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 0 4px;
-  /* Add small padding for spacing between items */
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); User didn't ask for shadow, and flat design is more likely */
+  padding: 0 10px;
+  /* Gap between items */
   transition: opacity 0.3s ease;
+  position: relative;
 }
 
 .campaign-item:hover {
-  opacity: 0.5;
+  opacity: 0.9;
 }
 
 .campaign-item img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  /* Enforces the aspect ratio/size uniformity */
   display: block;
 }
 
-.carousel-btn {
-  width: 40px;
-  height: 40px;
-  background-color: transparent;
-  border: none;
-  font-size: 32px;
-  font-weight: 300;
-  color: var(--text-dark);
-  cursor: pointer;
+/* New Footer Controls */
+.campaign-controls-footer {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  transition: opacity 0.2s, transform 0.2s;
-  padding: 0;
-  line-height: 1;
-  flex-shrink: 0;
-  z-index: 10;
+  padding: 20px 40px;
+  /* Adjust as needed */
+  background-color: #F8F8F8;
+  /* Assuming light bg like provided images mostly have */
+}
+
+.carousel-footer-info {
+  display: flex;
+  gap: 40px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.carousel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.2s;
+}
+
+.carousel-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile responsive adjustments for items */
+@media (max-width: 767px) {
+  .campaign-item {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .campaign-controls-footer {
+    padding: 15px 20px;
+  }
 }
 
 .carousel-btn:hover {

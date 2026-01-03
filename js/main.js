@@ -53,8 +53,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const slideInterval = 3000; // 3 seconds
 
   if (slides.length > 0 && progressBar) {
-    // Initialize first run
-    startProgressBar();
+    // Initialize indicator height and position
+    const indicatorHeight = 100 / slides.length;
+    progressBar.style.height = `${indicatorHeight}%`;
+    progressBar.style.position = 'absolute';
+    progressBar.style.top = '0%';
+    progressBar.style.transition = 'top 0.3s ease'; // Optional smooth jump, or remove 'transition' line for instant jump
 
     setInterval(() => {
       // Fade out current
@@ -66,22 +70,10 @@ document.addEventListener('DOMContentLoaded', function () {
       // Fade in new
       slides[currentSlide].classList.add('active');
 
-      // Reset and restart progress bar
-      resetProgressBar();
-      // Use setTimeout to ensure the browser paints the reset state before starting animation again
-      setTimeout(startProgressBar, 50);
+      // Move indicator
+      progressBar.style.top = `${currentSlide * indicatorHeight}%`;
 
     }, slideInterval);
-
-    function startProgressBar() {
-      progressBar.style.transition = `height ${slideInterval}ms linear`;
-      progressBar.style.height = '100%';
-    }
-
-    function resetProgressBar() {
-      progressBar.style.transition = 'none';
-      progressBar.style.height = '0%';
-    }
   }
 
   // --- Sticky Header ---
@@ -97,6 +89,18 @@ document.addEventListener('DOMContentLoaded', function () {
       } else {
         header.classList.remove('scrolled');
       }
+    });
+  }
+
+  // --- Coupon Badge Close ---
+  const badgeClose = document.querySelector('.hero-badge-close');
+  const badge = document.querySelector('.hero-badge');
+
+  if (badgeClose && badge) {
+    badgeClose.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent bubbling if needed
+      e.preventDefault(); // Prevent link click if overlay is somehow nested (it's not, but good practice)
+      badge.style.display = 'none';
     });
   }
 
