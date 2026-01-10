@@ -5,14 +5,88 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ROKUMEI COFFEE</title>
+  <link rel="icon" href="assets/img/LOGO.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="js/main.js" defer></script>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/main.js" defer></script>
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
 </head>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
 
+  .stick-placeholder {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .sticky-container {
+    background-color: pink;
+    position: relative;
+    height: 100dvh;
+  }
+
+  .sticky-slide {
+    width: 100%;
+    height: 100dvh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 64px;
+    font-weight: 700;
+  }
+
+  .sticky-nav {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100dvh;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .sticky-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sticky-nav li {
+    margin: 12px 0;
+  }
+
+  .sticky-nav a {
+    color: #000;
+    font-size: 24px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .sticky-nav li.active a {
+    color: #fff;
+  }
+</style>
 <body>
   <div class="utility-bar">
     <div class="container">
@@ -30,8 +104,8 @@
           <!-- Slide 1 -->
           <div class="hero-slide active">
             <picture>
-              <source media="(max-width: 767px)" srcset="assets/FV01_SP.png">
-              <img src="assets/FV_01_PC.png" alt="Rokumei Coffee Slide 1">
+              <source media="(max-width: 767px)" srcset="assets/img/FV01_SP.png">
+              <img src="assets/img/FV_01_PC.png" alt="Rokumei Coffee Slide 1">
             </picture>
             <div class="hero-overlay-left">
               <p class="hero-title">コーヒーとパンのある日常</p>
@@ -39,7 +113,7 @@
               <p class="hero-description">ロクメイベイクスグランドオープン!</p>
               <a href="#readmore" class="hero-cta">
                 <p class="read-more">READ MORE<span class="cta-line"></span></p>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
               </a>
             </div>
           </div>
@@ -47,8 +121,8 @@
           <!-- Slide 2 -->
           <div class="hero-slide">
             <picture>
-              <source media="(max-width: 767px)" srcset="assets/FV02_SP.png">
-              <img src="assets/FV_02_PC.png" alt="Rokumei Coffee Slide 2">
+              <source media="(max-width: 767px)" srcset="assets/img/FV02_SP.png">
+              <img src="assets/img/FV_02_PC.png" alt="Rokumei Coffee Slide 2">
             </picture>
             <div class="hero-overlay-left">
               <!-- Placeholder text for other slides, assuming same structure or updated content. 
@@ -59,7 +133,7 @@
               <p class="hero-description">ロクメイベイクスグランドオープン！</p>
               <a href="#readmore" class="hero-cta">
                 <p class="read-more">READ MORE<span class="cta-line"></span></p>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
               </a>
             </div>
           </div>
@@ -67,8 +141,8 @@
           <!-- Slide 3 -->
           <div class="hero-slide">
             <picture>
-              <source media="(max-width: 767px)" srcset="assets/FV03_SP.png">
-              <img src="assets/FV_03_PC.png" alt="Rokumei Coffee Slide 3">
+              <source media="(max-width: 767px)" srcset="assets/img/FV03_SP.png">
+              <img src="assets/img/FV_03_PC.png" alt="Rokumei Coffee Slide 3">
             </picture>
             <div class="hero-overlay-left">
               <p class="hero-title">選び抜かれた、ロクメイセレクション</p>
@@ -76,7 +150,7 @@
               <p class="hero-description">ロクメイベイクスグランドオープン！</p>
               <a href="#readmore" class="hero-cta">
                 <p class="read-more">READ MORE<span class="cta-line"></span></p>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
               </a>
             </div>
           </div>
@@ -84,8 +158,8 @@
           <!-- Slide 4 -->
           <div class="hero-slide">
             <picture>
-              <source media="(max-width: 767px)" srcset="assets/FV04_SP.png">
-              <img src="assets/FV_04_PC.png" alt="Rokumei Coffee Slide 4">
+              <source media="(max-width: 767px)" srcset="assets/img/FV04_SP.png">
+              <img src="assets/img/FV_04_PC.png" alt="Rokumei Coffee Slide 4">
             </picture>
             <div class="hero-overlay-left">
               <p class="hero-title">日常をロクメイと。</p>
@@ -93,7 +167,7 @@
               <p class="hero-description">ロクメイベイクスグランドオープン！</p>
               <a href="#readmore" class="hero-cta">
                 <p class="read-more">READ MORE<span class="cta-line"></span></p>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
               </a>
             </div>
           </div>
@@ -101,8 +175,8 @@
           <!-- Slide 5 -->
           <div class="hero-slide">
             <picture>
-              <source media="(max-width: 767px)" srcset="assets/FV05_SP.png">
-              <img src="assets/FV_05_PC.png" alt="Rokumei Coffee Slide 5">
+              <source media="(max-width: 767px)" srcset="assets/img/FV05_SP.png">
+              <img src="assets/img/FV_05_PC.png" alt="Rokumei Coffee Slide 5">
             </picture>
             <div class="hero-overlay-left">
               <p class="hero-title">新パッケージになりました！</p>
@@ -110,7 +184,7 @@
               <p class="hero-description">ロクメイベイクスグランドオープン！</p>
               <a href="#readmore" class="hero-cta">
                 <p class="read-more">READ MORE<span class="cta-line"></span></p>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="cta-arrow">
               </a>
             </div>
           </div>
@@ -124,9 +198,14 @@
               <span></span>
               <span></span>
             </button>
-            <div class="hero-brand">
-              <a href="#home"><img src="assets/MainLOGO.png" alt="ROKUMEI COFFEE" class="hero-logo"></a>
-            </div>
+            <a href="#home" class="hero-brand">
+              <img
+                id="heroLogo"
+                src="assets/img/MainLOGO.png"
+                alt="ROKUMEI COFFEE"
+                class="hero-logo"
+              >
+            </a>                    
             <div class="hero-nav-actions">
               <nav class="hero-nav" aria-label="Primary">
                 <a href="#shop" class="nav-link">商品一覧</a>
@@ -137,13 +216,13 @@
               </nav>
               <div class="hero-actions">
                 <a href="#mypage" class="hero-action-link">
-                  <img src="assets/icon.png" alt="My Page" class="icon-white">
-                  <img src="assets/black MYPAGE.png" alt="My Page" class="icon-black">
+                  <img src="assets/img/icon.png" alt="My Page" class="icon-white">
+                  <img src="assets/img/black MYPAGE.png" alt="My Page" class="icon-black">
                   <span>MYPAGE</span>
                 </a>
                 <a href="#cart" class="hero-action-link">
-                  <img src="assets/icon (1).svg" alt="Cart" class="icon-white">
-                  <img src="assets/black CART.png" alt="Cart" class="icon-black">
+                  <img src="assets/img/icon (1).svg" alt="Cart" class="icon-white">
+                  <img src="assets/img/black CART.png" alt="Cart" class="icon-black">
                   <span>CART</span>
                 </a>
               </div>
@@ -157,17 +236,17 @@
                 <span class="close-info">CLOSE</span>
               </button>
               <div class="mobile-menu-logo">
-                <img src="assets/MainLOGO.png" alt="ROKUMEI COFFEE">
+                <img src="assets/img/MainLOGO.png" alt="ROKUMEI COFFEE">
               </div>
               <div class="mobile-menu-header-actions">
                 <a href="#mypage" class="mobile-header-action">
-                  <img src="assets/icon.png" alt="My Page" class="icon-white">
-                  <img src="assets/black MYPAGE.png" alt="My Page" class="icon-black">
+                  <img src="assets/img/icon.png" alt="My Page" class="icon-white">
+                  <img src="assets/img/black MYPAGE.png" alt="My Page" class="icon-black">
                   <span>MYPAGE</span>
                 </a>
                 <a href="#cart" class="mobile-header-action">
-                  <img src="assets/icon (1).svg" alt="Cart" class="icon-white">
-                  <img src="assets/black CART.png" alt="Cart" class="icon-black">
+                  <img src="assets/img/icon (1).svg" alt="Cart" class="icon-white">
+                  <img src="assets/img/black CART.png" alt="Cart" class="icon-black">
                   <span>CART</span>
                 </a>
               </div>
@@ -269,9 +348,9 @@
 
               <!-- Promo Images -->
               <div class="mobile-menu-banners">
-                <a href="#"><img src="assets/GIFT.png" alt="GIFT"></a>
-                <a href="#"><img src="assets/初めての方向け.png" alt="First time"></a>
-                <a href="#"><img src="assets/定期便.png" alt="Subscription"></a>
+                <a href="#"><img src="assets/img/GIFT.png" alt="GIFT"></a>
+                <a href="#"><img src="assets/img/初めての方向け.png" alt="First time"></a>
+                <a href="#"><img src="assets/img/定期便.png" alt="Subscription"></a>
               </div>
             </div>
           </div>
@@ -282,7 +361,7 @@
         <!-- Right coupon badge (Keep outside slides) -->
         <div class="hero-badge">
           <div class="hero-badge-close"></div>
-          <a href="https://page.line.me/921ehldc?openQrModal=true" class="hero-badge-link"><img src="assets/COUPON.png"
+          <a href="https://page.line.me/921ehldc?openQrModal=true" class="hero-badge-link"><img src="assets/img/COUPON.png"
               alt="Line Coupon"></a>
         </div>
       </div>
@@ -299,13 +378,13 @@
             <div class="campaign-slider-wrapper">
               <div class="campaign-slider">
                 <article class="campaign-item">
-                  <img src="assets/RC_EC_banner_07 1.png" alt="Campaign banner 1">
+                  <img src="assets/img/RC_EC_banner_07 1.png" alt="Campaign banner 1">
                 </article>
                 <article class="campaign-item">
-                  <img src="assets/banner.png" alt="Campaign banner 2">
+                  <img src="assets/img/banner.png" alt="Campaign banner 2">
                 </article>
                 <article class="campaign-item">
-                  <img src="assets/banner (1).png" alt="Campaign banner 3">
+                  <img src="assets/img/banner (1).png" alt="Campaign banner 3">
                 </article>
               </div>
             </div>
@@ -342,26 +421,26 @@
         <div class="topics-wrapper">
           <div class="topic-left">
             <a href="#" class="topic-link">
-              <img src="assets/GIFT.png" alt="Gift">
+              <img src="assets/img/GIFT.png" alt="Gift">
               <div class="topic-arrow-wrapper">
                 <span class="topic-line"></span>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="topic-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="topic-arrow">
               </div>
             </a>
           </div>
           <div class="topic-right">
             <a href="#" class="topic-link topic-right-item">
-              <img src="assets/初めての方向け.png" alt="First time">
+              <img src="assets/img/初めての方向け.png" alt="First time">
               <div class="topic-arrow-wrapper">
                 <span class="topic-line"></span>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="topic-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="topic-arrow">
               </div>
             </a>
             <a href="#" class="topic-link topic-right-item">
-              <img src="assets/定期便.png" alt="Regular Flight">
+              <img src="assets/img/定期便.png" alt="Regular Flight">
               <div class="topic-arrow-wrapper">
                 <span class="topic-line"></span>
-                <img src="assets/プロパティ1=デフォルト.png" alt="" class="topic-arrow">
+                <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="topic-arrow">
               </div>
             </a>
           </div>
@@ -378,9 +457,9 @@
         <div class="product-grid">
           <!-- Row 1 -->
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/rcob-tobihino_pic_01 1.png" alt="Tobihino Blend" class="product-img">
+              <img src="assets/img/rcob-tobihino_pic_01 1.png" alt="Tobihino Blend" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">飛火野ブレンド</p>
@@ -388,9 +467,9 @@
             </div>
           </article>
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/000000000664-01-l 1.png" alt="Brazil" class="product-img">
+              <img src="assets/img/000000000664-01-l 1.png" alt="Brazil" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">【訳あり 40%OFF】クラフトコーヒー<br>ブーケブレンド<br>(母の日ラベル) 330ml 1本</p>
@@ -398,9 +477,9 @@
             </div>
           </article>
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/000000000661-01-l 1.png" alt="Cold Brew" class="product-img">
+              <img src="assets/img/000000000661-01-l 1.png" alt="Cold Brew" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">水出しコーヒーパックCOLD BREW<br>Refresh (コールドブリューリフレッシュ)<br>5パック (約17杯分)</p>
@@ -408,9 +487,9 @@
             </div>
           </article>
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/528304648_18522991381050972_9199068920409036052_n 1.png" alt="Pudding"
+              <img src="assets/img/528304648_18522991381050972_9199068920409036052_n 1.png" alt="Pudding"
                 class="product-img">
             </div>
             <div class="product-meta">
@@ -421,9 +500,9 @@
 
           <!-- Row 2 (Duplicate of Row 1) -->
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/rcob-tobihino_pic_01 1.png" alt="Tobihino Blend" class="product-img">
+              <img src="assets/img/rcob-tobihino_pic_01 1.png" alt="Tobihino Blend" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">飛火野ブレンド</p>
@@ -431,9 +510,9 @@
             </div>
           </article>
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/000000000664-01-l 1.png" alt="Craft Coffee" class="product-img">
+              <img src="assets/img/000000000664-01-l 1.png" alt="Craft Coffee" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">【訳あり 40%OFF】クラフトコーヒー<br>ブーケブレンド<br>(母の日ラベル) 330ml 1本</p>
@@ -441,9 +520,9 @@
             </div>
           </article>
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/000000000661-01-l 1.png" alt="Cold Brew" class="product-img">
+              <img src="assets/img/000000000661-01-l 1.png" alt="Cold Brew" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">水出しコーヒーパックCOLD BREW<br>Refresh (コールドブリューリフレッシュ)<br>5パック (約17杯分)</p>
@@ -451,9 +530,9 @@
             </div>
           </article>
           <article class="product-card">
-            <img src="assets/new.png" alt="New" class="new-badge-img">
+            <img src="assets/img/new.png" alt="New" class="new-badge-img">
             <div class="product-image-wrapper">
-              <img src="assets/528304648_18522991381050972_9199068920409036052_n 1.png" alt="Pudding"
+              <img src="assets/img/528304648_18522991381050972_9199068920409036052_n 1.png" alt="Pudding"
                 class="product-img">
             </div>
             <div class="product-meta">
@@ -466,19 +545,39 @@
     </section>
 
     <!-- About -->
-    <section id="about" class="about">
-      <div class="about-hero">
-        <img src="assets/スタジオセッション-1597.png" alt="Coffee beans roasting" class="about-bg">
-        <div class="about-overlay-content">
-          <h3 class="about-title">ABOUT<br>ROKUMEI<br>COFFEE</h3>
-          <p class="about-text">
-            ロクメイコーヒーは、古都奈良で1974年創<br>
-            業のスペシャルティーコーヒー専門店です。<br>
-            焙煎技術の日本大会で優勝実績を持つ焙煎人<br>
-            がこだわり抜いた、コーヒーの素材本来のお<br>
-            いしさを感じる一杯をお届けします。
-          </p>
+    <section id="about" class="about ">
+      <div class="about-hero sticky-container">
+        <picture id="slide1" class="sticky-slide">
+          <source srcset="assets/img/スタジオセッション-1597-sp.png" media="(max-width: 768px)">
+          <img src="assets/img/スタジオセッション-1597.png" alt="Coffee beans roasting" class="about-bg">
+          <div class="about-overlay-content">
+            <h3 class="about-title">ABOUT<br>ROKUMEI<br>COFFEE</h3>
+            <p class="about-text">
+              ロクメイコーヒーは、古都奈良で1974年創<br>
+              業のスペシャルティーコーヒー専門店です。<br>
+              焙煎技術の日本大会で優勝実績を持つ焙煎人<br>
+              がこだわり抜いた、コーヒーの素材本来のお<br>
+              いしさを感じる一杯をお届けします。
+            </p>
+          </picture>
         </div>
+        <picture id="slide1" class="sticky-slide">
+          <source srcset="assets/img/スタジオセッション-1597-1.png" media="(max-width: 768px)">
+          <img src="assets/img/スタジオセッション-1597-1.png" alt="Coffee beans roasting" class="about-bg">
+          <div class="about-overlay-content">
+            <h3 class="about-title">ABOUT ROKUMEI COFFEE<br>SPECIALTY<br>for EVERYDAY</h3>
+            <p class="about-text">
+              おいしいスペシャルティコーヒーがあると、<br>
+              日常に豊かな時間が流れはじます。焙煎豆は<br>
+              もちろん、クラフトコーヒーやスイーツとと<br>
+              もに、ロクメイコーヒーならではの“コー<br>
+              ヒー時間”をお楽しみください。ロクメイ<br>
+              コーヒーEC店は、いつでも繋がれる、あな<br>
+              たのための焙煎所です。今日も特別な一杯を<br>
+              焙煎所からお届けしています。
+            </p>
+          </div>
+        </picture>
       </div>
     </section>
 
@@ -492,7 +591,7 @@
           <!-- Row 1 -->
           <article class="category-item">
             <a href="#" class="category-link">
-              <img src="assets/スタジオセッション-2179 1.png" alt="Coffee Beans">
+              <img src="assets/img/スタジオセッション-2179 1.png" alt="Coffee Beans">
               <div class="category-overlay">
                 <span class="category-jp">コーヒー豆</span>
                 <span class="category-en">COFFEE</span>
@@ -501,7 +600,7 @@
           </article>
           <article class="category-item">
             <a href="#" class="category-link">
-              <img src="assets/スタジオセッション-1871 1.png" alt="Drip Bag">
+              <img src="assets/img/スタジオセッション-1871 1.png" alt="Drip Bag">
               <div class="category-overlay">
                 <span class="category-jp">ドリップバッグ</span>
                 <span class="category-en">DRIP BAG</span>
@@ -510,7 +609,7 @@
           </article>
           <article class="category-item">
             <a href="#" class="category-link">
-              <img src="assets\スタジオセッション-2405 1.png" alt="Liquid Coffee">
+              <img src="assets/img/スタジオセッション-2405 1.png" alt="Liquid Coffee">
               <div class="category-overlay">
                 <span class="category-jp">リキッドコーヒー</span>
                 <span class="category-en">LIQUID COFFEE</span>
@@ -521,7 +620,7 @@
           <!-- Row 2 -->
           <article class="category-item">
             <a href="#" class="category-link">
-              <img src="assets/スタジオセッション-2034 1.png" alt="Sweets">
+              <img src="assets/img/スタジオセッション-2034 1.png" alt="Sweets">
               <div class="category-overlay">
                 <span class="category-jp">スイーツ</span>
                 <span class="category-en">SWEETS</span>
@@ -530,7 +629,7 @@
           </article>
           <article class="category-item">
             <a href="#" class="category-link">
-              <img src="assets/スタジオセッション-2625 1.png" alt="Goods">
+              <img src="assets/img/スタジオセッション-2625 1.png" alt="Goods">
               <div class="category-overlay">
                 <span class="category-jp">オリジナルグッズ</span>
                 <span class="category-en">GOODS</span>
@@ -554,8 +653,8 @@
         <div class="product-grid ranking-grid">
           <article class="product-card">
             <div class="product-image-wrapper">
-              <img src="assets/new.png" alt="New" class="new-badge-img">
-              <img src="assets/rcob-tobihino_pic_01 1.png" alt="Tobihino Blend" class="product-img">
+              <img src="assets/img/new.png" alt="New" class="new-badge-img">
+              <img src="assets/img/rcob-tobihino_pic_01 1.png" alt="Tobihino Blend" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">飛火野ブレンド</p>
@@ -564,8 +663,8 @@
           </article>
           <article class="product-card">
             <div class="product-image-wrapper">
-              <img src="assets/new.png" alt="New" class="new-badge-img">
-              <img src="assets/000000000664-01-l 1.png" alt="Brazil" class="product-img">
+              <img src="assets/img/new.png" alt="New" class="new-badge-img">
+              <img src="assets/img/000000000664-01-l 1.png" alt="Brazil" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">【訳あり 40%OFF】クラフトコーヒー<br>ブーケブレンド<br>(母の日ラベル) 330ml 1本</p>
@@ -574,8 +673,8 @@
           </article>
           <article class="product-card">
             <div class="product-image-wrapper">
-              <img src="assets/new.png" alt="New" class="new-badge-img">
-              <img src="assets/000000000661-01-l 1.png" alt="Cold Brew" class="product-img">
+              <img src="assets/img/new.png" alt="New" class="new-badge-img">
+              <img src="assets/img/000000000661-01-l 1.png" alt="Cold Brew" class="product-img">
             </div>
             <div class="product-meta">
               <p class="product-name">水出しコーヒーパックCOLD BREW<br>Refresh (コールドブリューリフレッシュ)<br>5パック (約17杯分)</p>
@@ -584,8 +683,8 @@
           </article>
           <article class="product-card">
             <div class="product-image-wrapper">
-              <img src="assets/new.png" alt="New" class="new-badge-img">
-              <img src="assets/528304648_18522991381050972_9199068920409036052_n 1.png" alt="Pudding"
+              <img src="assets/img/new.png" alt="New" class="new-badge-img">
+              <img src="assets/img/528304648_18522991381050972_9199068920409036052_n 1.png" alt="Pudding"
                 class="product-img">
             </div>
             <div class="product-meta">
@@ -617,7 +716,7 @@
         <div class="column-grid">
           <article class="column-card">
             <figure class="column-image">
-              <img src="assets/スタジオセッション-4009 1.png" alt="Rokumei Bakes">
+              <img src="assets/img/スタジオセッション-4009 1.png" alt="Rokumei Bakes">
             </figure>
             <div class="column-content">
               <div class="column-meta">
@@ -629,7 +728,7 @@
           </article>
           <article class="column-card">
             <figure class="column-image">
-              <img src="assets/スタジオセッション-2623 1.png" alt="New Tumbler">
+              <img src="assets/img/スタジオセッション-2623 1.png" alt="New Tumbler">
             </figure>
             <div class="column-content">
               <div class="column-meta">
@@ -641,7 +740,7 @@
           </article>
           <article class="column-card">
             <figure class="column-image">
-              <img src="assets/スタジオセッション-2405 1.png" alt="Craft Coffee Comparison">
+              <img src="assets/img/スタジオセッション-2405 1.png" alt="Craft Coffee Comparison">
             </figure>
             <div class="column-content">
               <div class="column-meta">
@@ -695,8 +794,8 @@
         <a href="#shoplist" class="shoplist-link">
           <div class="shoplist-wrapper">
             <picture>
-              <source media="(max-width: 767px)" srcset="assets/ShopListSP.png">
-              <img src="assets/ShoplistPC.png" alt="Shop List Banner" class="shoplist-image">
+              <source media="(max-width: 767px)" srcset="assets/img/ShopListSP.png">
+              <img src="assets/img/ShoplistPC.png" alt="Shop List Banner" class="shoplist-image">
             </picture>
             <div class="shoplist-overlay">
               <h3 class="shoplist-title">SHOP LIST</h3>
@@ -704,7 +803,7 @@
             <!-- Arrow Animation Wrapper -->
             <div class="shoplist-arrow-wrapper">
               <span class="shoplist-line"></span>
-              <img src="assets/プロパティ1=デフォルト.png" alt="" class="shoplist-arrow-icon">
+              <img src="assets/img/プロパティ1=デフォルト.png" alt="" class="shoplist-arrow-icon">
             </div>
           </div>
         </a>
@@ -713,7 +812,7 @@
   </main>
 
   <footer class="site-footer">
-    <img src="assets/footer.png" alt="Footer Image" class="footer-image">
+    <img src="assets/img/footer.png" alt="Footer Image" class="footer-image">
       <div class="footer-inner">
         <div class="footer-left">
           <h2 class="footer-logo">ROKUMEI COFFEE</h2>
@@ -766,8 +865,8 @@
             <div class="footer-newsletter">
               <h3 class="newsletter-title">Newsletter</h3>
               <form class="newsletter-form">
-                <input type="text" placeholder="名前" class="newsletter-input" required>
-                <input type="email" placeholder="メールアドレス" class="newsletter-input" required>
+                <input type="text" placeholder="名前" class="newsletter-input">
+                <input type="email" placeholder="メールアドレス" class="newsletter-input">
                 <p class="newsletter-note">ROKUMEI COFFEEの最新情報をお届けします<br>※ご登録いただくと<a href="#">プライバシーポリシー</a>に同意したものとみなされます。
                 </p>
                 <button type="submit" class="newsletter-btn">登録する</button>
@@ -780,5 +879,50 @@
       </div>
   </footer>
 </body>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+    const slides = document.querySelectorAll('.sticky-slide');
+    const navItems = document.querySelectorAll('.sticky-nav li');
+
+    const tl = gsap.timeline({
+      defaults: {
+        ease: 'none',
+        duration: 1,
+      },
+      scrollTrigger: {
+        trigger: '.sticky-container',
+        start: 'top top',
+        end: '+=3000',
+        pin: true,
+        scrub: true,
+        markers: true,
+        onUpdate: (self) => {
+          navItems.forEach(item => item.classList.remove('active'));
+          const activeIndex = Math.round(self.progress * (slides.length - 1));
+          navItems[activeIndex].classList.add('active');
+        },
+      },
+    });
+
+    slides.forEach((slide, index) => {
+      if (index === 0) return;
+      tl.from(slide, { yPercent: 100 });
+    });
+
+    const links = gsap.utils.toArray('.sticky-nav a');
+
+    links.forEach((a, index) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        gsap.to(window, {
+          duration: 1,
+          scrollTo: tl.scrollTrigger.start + (tl.scrollTrigger.end - tl.scrollTrigger.start) * (index / (slides.length - 1)),
+          overwrite: 'auto'
+        });
+      });
+    });
+  });
+</script>
 </html>

@@ -8,18 +8,18 @@
   --text-dark: #1A1A1A;
   --text-gray: #5B5B5B;
   --border-gray: #E5E5E5;
-  --max-width-desktop: 1200px;
+  --max-width-desktop: 1280px;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
-  --spacing-ssm: 1.25rem;
+  /* --spacing-ssm: 1.25rem; */
   --spacing-md: 1.5rem;
-  --spacing-mmd: 1.75rem;
+  /* --spacing-mmd: 1.75rem; */
   --spacing-lg: 2rem;
   --spacing-xl: 3rem;
   --spacing-xxl: 4rem;
-  --spacing-xxxl: 126px;
+  --spacing-xxxl: 7rem;
 
   /* Typography */
   --font-family: "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -37,7 +37,7 @@
 
   /* Sticky Header heights - Approximate based on font size + padding */
   --utility-bar-height-pc: 40px;
-  --utility-bar-height-sp: 32px;
+  --utility-bar-height-sp: 36px;
 }
 
 /* ============================================
@@ -48,9 +48,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+html, body{
+  min-width: 375px;
+}
 
 html {
-  font-size: 16px;
+  font-size: 14px;
   scroll-behavior: smooth;
 }
 
@@ -85,23 +88,15 @@ ul {
   list-style: none;
 }
 
-.read-more {
-  position: absolute;
-  bottom: 18px;
-  left: 5px;
-  z-index: 10;
-}
-
 /* ============================================
    Container
    ============================================ */
-
-@media (max-width: 1280px){
-  .container {
-    width: 100%;
-    margin: 0 auto;
-  }
+.container {
+  max-width: 1280px;
+  width: 100%;
+  margin-inline: auto;
 }
+
 /* ============================================
    Utility Bar
    ============================================ */
@@ -109,7 +104,6 @@ ul {
   background-color: #F5F5F5;
   border-bottom: 1px solid var(--border-gray);
   padding: 0;
-  /* Removing padding to use flex alignment and fixed height */
   height: var(--utility-bar-height-pc);
   display: flex;
   align-items: center;
@@ -118,7 +112,6 @@ ul {
   position: sticky;
   top: 0;
   z-index: 1002;
-  /* Higher than header (1001) */
   width: 100%;
 }
 
@@ -143,31 +136,15 @@ ul {
   color: var(--text-dark);
 }
 
-@media (max-width: 767px) {
-  .utility-bar {
-    height: var(--utility-bar-height-sp);
-  }
-
-  .utility-text {
-    font-size: 0.65rem;
-  }
-}
-
 /* ============================================
    Header (Legacy - kept for compatibility)
    ============================================ */
-/* .site-header {
-  display: none;
-} */
-
 /* ============================================
    Hero Section
    ============================================ */
 .hero {
   width: 100%;
-  /* margin-bottom: var(--spacing-xl); */
   position: relative;
-  /* Ensure header and other elements stack correctly */
 }
 
 /* Slideshow Container */
@@ -175,13 +152,10 @@ ul {
   position: relative;
   width: 100%;
   height: 100vh;
-  /* Full viewport height for impact */
-  max-height: 800px;
-  /* Optional cap */
+  max-height: 720px;
   min-height: 500px;
   overflow: hidden;
   background-color: #000;
-  /* Fallback */
 }
 
 .hero-slides {
@@ -218,10 +192,8 @@ ul {
   position: absolute;
   top: 50%;
   right: 40px;
-  /* Adjust based on container padding or visual reference */
   width: 1px;
   height: 120px;
-  /* Fixed height matching visual reference */
   transform: translateY(-50%);
   background-color: rgba(255, 255, 255, 0.3);
   z-index: 20;
@@ -230,7 +202,6 @@ ul {
 .hero-progress-line .progress-bar {
   display: block;
   width: 100%;
-  /* Height and top are controlled by JS */
   background-color: #FFFFFF;
   position: absolute;
   left: 0;
@@ -243,9 +214,15 @@ ul {
   left: 0;
   right: 0;
   z-index: 100;
-  padding: var(--spacing-ssm) var(--spacing-xl);
-  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4) 0%, transparent 100%); */
+  padding: var(--spacing-sm) var(--spacing-xl);
   transition: background-color 0.3s, padding 0.3s, box-shadow 0.3s;
+}
+
+.read-more {
+  position: absolute;
+  bottom: 18px;
+  left: 5px;
+  z-index: 10;
 }
 
 .mobile-menu-toggle {
@@ -272,11 +249,9 @@ ul {
 /* Sticky Header State */
 .site-header.scrolled {
   position: fixed;
-  /* Top is dynamic based on viewport width (pc vs sp) */
   top: var(--utility-bar-height-pc);
   background-color: rgba(255, 255, 255, 0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 3px var(--spacing-xl);
   animation: slideDown 0.3s ease-out;
 }
 
@@ -305,6 +280,8 @@ ul {
 }
 
 .site-header.scrolled .hero-logo {
+  width: 72px;
+  height: 41px;
   filter: invert(1) brightness(0.2);
   /* Make logo dark if it's white */
 }
@@ -333,7 +310,7 @@ ul {
 .hero-nav {
   display: flex;
   align-items: center;
-  gap: var(--spacing-ssm);
+  gap: var(--spacing-sm);
   font-size: var(--font-size-sm);
   font-weight: 500;
   justify-content: center;
@@ -372,7 +349,7 @@ ul {
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: var(--spacing-ssm);
+  gap: var(--spacing-sm);
   flex: 0 0 auto;
 }
 
@@ -423,10 +400,7 @@ ul {
   border: none;
   cursor: pointer;
   z-index: 200;
-  /* Ensure above overlay */
 }
-
-/* ... existing styles ... */
 
 .hero-overlay-left {
   position: absolute;
@@ -456,15 +430,8 @@ ul {
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
 }
 
-/* .hero-subtitle {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
-  line-height: 1.4;
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
-} */
-
 .hero-cta {
+  width: 100%;
   display: inline-block;
   color: var(--bg-white);
   font-size: 0.85rem;
@@ -476,23 +443,8 @@ ul {
   transition: opacity 0.3s;
 }
 
-.hero-cta {
-  display: inline-block;
-  color: var(--bg-white);
-  font-size: 0.85rem;
-  font-weight: 700;
-  text-decoration: none;
-  position: relative;
-  /* padding-bottom: 25px; Increased padding to fit the new arrow below */
-  letter-spacing: 0.05em;
-  transition: opacity 0.3s;
-  display: flex;
-  flex-direction: column;
-}
-
 .hero-cta:hover {
   opacity: 1;
-  /* Keep opacity fully visible, we animate children */
 }
 
 /* Hide the old line */
@@ -503,39 +455,24 @@ ul {
 .cta-arrow {
   position: relative;
   margin-top: 0px;
-  /* Reduced margin to bring text near arrow */
-  /* Remove old absolute positioning */
   left: auto;
   bottom: auto;
   opacity: 1;
   pointer-events: none;
-
-  /* Initial State: Hidden via clip-path (clipped from right to left) */
-  /* We want reveal FROM left TO right. So we start with inset(0 100% 0 0) - full right clip */
   clip-path: inset(0 100% 0 0);
   transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-
-  /* Specific Dimensions */
-  width: 240px;
+  max-width: 240px;
   height: 8px;
-
-  /* Border as requested */
-  /* border: 1px solid currentColor; */
-  /* Using text color (white) */
-
   object-fit: cover;
-  /* Ensure image fills the exact dimensions */
 }
 
 .hero-cta:hover .cta-arrow {
-  /* Reveal State: No clip */
   clip-path: inset(0 0 0 0);
   opacity: 1;
 }
 
 .hero-cta .arrow {
   display: none;
-  /* Hide the img arrow as we use CSS */
 }
 
 
@@ -549,16 +486,13 @@ ul {
 
 .hero-badge-close {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 3px;
+  right: 15px;
   width: 30px;
-  /* Estimated size of the cross icon area */
   height: 30px;
   cursor: pointer;
   z-index: 20;
-  /* Above the link */
   background-color: transparent;
-  /* Invisible hotpost */
 }
 
 .hero-badge img {
@@ -573,146 +507,6 @@ ul {
   gap: 65px;
 }
 
-@media (max-width: 1023px) {
-  .hero-nav {
-    gap: var(--spacing-md);
-    font-size: var(--font-size-xs);
-  }
-
-  .hero-actions {
-    gap: var(--spacing-sm);
-  }
-
-  .hero-action-link {
-    font-size: 0.7rem;
-  }
-
-  .hero-overlay-left {
-    left: 20px;
-    bottom: 10%;
-    max-width: 400px;
-  }
-
-  .hero-title {
-    font-size: var(--font-size-xl);
-  }
-}
-
-@media (max-width: 767px) {
-  .hero-header-inner {
-    flex-wrap: wrap;
-  }
-
-  .hero-nav,
-  .hero-actions {
-    display: none;
-  }
-
-  .hero-nav.active,
-  .hero-actions.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: var(--spacing-md);
-    margin-top: var(--spacing-md);
-    gap: var(--spacing-sm);
-  }
-
-  .mobile-menu-toggle {
-    display: flex;
-  }
-
-  .mobile-menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-
-  .mobile-menu-toggle.active span:nth-child(2) {
-    opacity: 0;
-  }
-
-  .mobile-menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-  }
-
-  .hero-overlay-left {
-    position: absolute;
-    bottom: 60px;
-    left: 20px;
-    right: 20px;
-    top: auto;
-    transform: none;
-    padding: 0;
-    background-color: transparent;
-    max-width: calc(100% - 40px);
-    margin-top: 0;
-  }
-
-  .hero-description {
-    font-size: 0.8rem;
-  }
-
-  .hero-subtitle {
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-cta {
-    font-size: 0.75rem;
-  }
-
-  /* .cta-line { width: 150px; } - Removed */
-
-  /* .hero-cta:hover .cta-line { width: 180px; } - Removed */
-
-  /* .hero-cta:hover .cta-arrow { left: 174px; } - Removed */
-
-  /* Center black logo on mobile scrolled state */
-  .site-header.scrolled {
-    top: var(--utility-bar-height-sp);
-  }
-
-  .site-header.scrolled .hero-header-inner {
-    justify-content: center;
-    position: relative;
-  }
-
-  .site-header.scrolled .mobile-menu-toggle {
-    position: absolute;
-    left: 20px;
-  }
-
-  .site-header.scrolled .hero-actions {
-    display: flex;
-    /* Show icons in mobile sticky bar */
-    position: absolute;
-    right: 20px;
-  }
-
-  .site-header.scrolled .hero-logo {
-    filter: invert(1) brightness(0.2);
-    /* Make MainLOGO.png black on mobile scrolled state */
-  }
-
-  .hero-title {
-    font-size: var(--font-size-lg);
-  }
-
-  .hero-description,
-  .hero-subtitle {
-    font-size: var(--font-size-sm);
-  }
-
-  .hero-badge {
-    bottom: 1rem;
-    right: 1rem;
-  }
-
-  .hero-badge img {
-    max-width: 150px;
-  }
-}
-
 /* Detailed Mobile Menu Overlay */
 .mobile-menu-overlay {
   position: fixed;
@@ -721,7 +515,6 @@ ul {
   width: 100%;
   height: 100vh;
   background-color: #F0EDE9;
-  /* Beige background to match design */
   z-index: 1000;
   opacity: 0;
   visibility: hidden;
@@ -741,7 +534,6 @@ ul {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Center the logo */
   padding: 15px 20px;
   background-color: #fff;
   border-bottom: 1px solid #E5E5E5;
@@ -789,14 +581,12 @@ ul {
 
 .close-info {
   display: none;
-  /* Hide text, just X */
 }
 
 .mobile-menu-logo img {
   height: 40px;
   width: auto;
   filter: invert(1) brightness(0.2);
-  /* Ensure MainLOGO.png is black in menu overlay */
 }
 
 .mobile-menu-header-actions {
@@ -835,7 +625,6 @@ ul {
 /* Red Promo Banner */
 .mobile-promo-banner {
   background-color: #A62A11;
-  /* Dark red */
   color: #fff;
   padding: 20px;
   text-align: center;
@@ -1030,16 +819,6 @@ ul {
   color: var(--text-dark);
 }
 
-@media (max-width: 767px) {
-  .section-header h2 {
-    font-size: var(--font-size-lg);
-  }
-
-  .section-header {
-    margin-bottom: var(--spacing-md);
-  }
-}
-
 /* ============================================ 
    Campaign Section
    ============================================ */
@@ -1057,12 +836,6 @@ ul {
   flex-direction: column;
   gap: 60px;
 }
-@media (max-width: 767px) {
-  .campaign {
-    width: 375px;
-    height: 774px;
-  }
-}
 
 .campaign-carousel {
   width: 100%;
@@ -1074,7 +847,6 @@ ul {
 .campaign-carousel-inner {
   width: 100%;
   flex: 1;
-  /* Take available space */
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -1103,12 +875,9 @@ ul {
   flex: 0 0 calc(100% / 3);
   width: calc(100% / 3);
   height: 100%;
-  /* Force full height of the slider area */
   border-radius: 4px;
   overflow: hidden;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); User didn't ask for shadow, and flat design is more likely */
   padding: 0 10px;
-  /* Gap between items */
   transition: opacity 0.3s ease;
   position: relative;
 }
@@ -1121,7 +890,6 @@ ul {
   width: 450px;
   height: 450px;
   object-fit: cover;
-  /* Enforces the aspect ratio/size uniformity */
   display: block;
 }
 
@@ -1132,9 +900,7 @@ ul {
   align-items: center;
   padding: 0 var(--spacing-xxxl);
   padding-top: 30px;
-  /* Adjust as needed */
   background-color: #F8F8F8;
-  /* Assuming light bg like provided images mostly have */
 }
 
 .carousel-footer-info {
@@ -1156,19 +922,6 @@ ul {
 
 .carousel-btn:hover {
   transform: scale(1.1);
-}
-
-/* Mobile responsive adjustments for items */
-@media (max-width: 767px) {
-  .campaign-item {
-    flex: 0 0 100%;
-    width: 100%;
-    padding: 0;
-  }
-
-  .campaign-controls-footer {
-    padding: 15px 20px;
-  }
 }
 
 .carousel-btn:hover {
@@ -1194,33 +947,6 @@ ul {
   font-size: var(--font-size-sm);
   color: var(--text-dark);
   font-weight: 500;
-}
-
-@media (max-width: 767px) {
-  .campaign-carousel {
-    gap: var(--spacing-sm);
-  }
-
-  .carousel-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 28px;
-  }
-
-  .carousel-footer {
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-sm);
-  }
-
-  .carousel-tag {
-    font-size: var(--font-size-xs);
-  }
-
-  .campaign-item {
-    flex: 0 0 100%;
-    width: 100%;
-    padding: 0;
-  }
 }
 
 /* ============================================
@@ -1271,7 +997,7 @@ ul {
 .topic-link:hover img {
   transform: scale(1.03);
   opacity: 0.5;
-  transition: transform 0.6s ease-in-out;
+  transition: 0.5s;
 }
 
 /* ===============================
@@ -1289,13 +1015,6 @@ ul {
   z-index: 5;
 }
 
-/* ===============================
-   LINE ANIMATION
-================================ */
-
-/* ===============================
-   ARROW IMAGE (CLIP-PATH REVEAL)
-================================ */
 .topic-arrow {
   position: absolute;
   bottom: -3px;
@@ -1304,14 +1023,9 @@ ul {
   height: auto;
   opacity: 1;
   pointer-events: none;
-
   filter: brightness(0) invert(1);
-
-  /* Initial hidden state (right → left clip) */
   clip-path: inset(0 100% 0 0);
-
   transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-
   object-fit: cover;
 }
 
@@ -1328,18 +1042,6 @@ ul {
   opacity: 1;
 }
 
-@media (max-width: 767px) {
-  .topics-wrapper {
-    flex-direction: column;
-  }
-
-  .topic-left,
-  .topic-right {
-    width: 100%;
-  }
-}
-
-
 /* ============================================
    Product Grid (New Arrival & Ranking)
    ============================================ */
@@ -1351,14 +1053,11 @@ ul {
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   row-gap: var(--spacing-xl);
-  /* More vertical space between rows */
 }
 
 .product-card {
   background-color: transparent;
-  /* Remove white background */
   box-shadow: none;
-  /* Remove shadow */
   border-radius: 0;
   position: relative;
   transition: transform 0.2s;
@@ -1382,7 +1081,6 @@ ul {
   object-fit: contain;
   display: block;
   mix-blend-mode: multiply;
-  /* Helps blend the image if it has a white bg, though pngs are better */
   transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
@@ -1442,31 +1140,6 @@ ul {
 .new-arrivals{
   padding: 100px var(--spacing-xl);
 }
-/* Old badge styles removed */
-
-@media (max-width: 1023px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    /* Remove horizontal scrolling for better responsiveness matching design */
-    display: grid;
-    overflow-x: visible;
-    scroll-snap-type: none;
-    gap: var(--spacing-md);
-  }
-
-  .product-card {
-    flex: 0 0 auto;
-    scroll-snap-align: none;
-    min-width: 0;
-  }
-}
-
-@media (max-width: 767px) {
-  .product-grid {
-    gap: var(--spacing-sm);
-    row-gap: var(--spacing-lg);
-  }
-}
 
 /* ============================================
    About Section
@@ -1479,16 +1152,12 @@ ul {
 .about-hero {
   position: relative;
   width: 100%;
-  /* Define a height or aspect ratio based on the image/design */
   height: 775px;
   overflow: hidden;
 }
 
 .about-bg {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .about-overlay-content {
@@ -1507,12 +1176,10 @@ ul {
   font-size: 3rem;
   font-weight: 400;
   width: max-content;
-  /* Serif-like elegance */
   letter-spacing: 0.1em;
   color: var(--bg-white);
   line-height: 1.2;
   font-family: serif;
-  /* Assuming serif for the "ABOUT ROKUMEI COFFEE" look */
 }
 
 .about-text {
@@ -1522,24 +1189,6 @@ ul {
   max-width: 600px;
   margin-top: auto;
   /* Push to bottom if flex space allows, or use absolute positioning if strictly needed */
-}
-
-@media (max-width: 767px) {
-  .about-hero {
-    height: 500px;
-  }
-
-  .about-overlay-content {
-    padding: var(--spacing-lg);
-  }
-
-  .about-title {
-    font-size: 2rem;
-  }
-
-  .about-text {
-    font-size: 0.8rem;
-  }
 }
 
 /* ============================================
@@ -1610,7 +1259,6 @@ ul {
   z-index: 10;
   width: 100%;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  /* Ensure readability */
 }
 
 .category-jp {
@@ -1629,30 +1277,8 @@ ul {
   letter-spacing: 0.05em;
   text-transform: uppercase;
   font-family: sans-serif;
-  /* Ensuring specific look */
   opacity: 0.9;
 }
-
-/* Responsive */
-@media (max-width: 1023px) {
-  /* No specific change needed for tablet if grid holds up, 
-     but maybe simplify? usage of 6 columns is fine down to tablet. */
-}
-
-@media (max-width: 767px) {
-  .category-grid {
-    grid-template-columns: 1fr;
-    /* Stack vertically on mobile */
-    gap: var(--spacing-sm);
-  }
-
-  .category-item:nth-child(n) {
-    grid-column: span 1;
-    /* Reset spans */
-  }
-}
-
-
 
 /* ============================================
    Ranking Section
@@ -1660,10 +1286,8 @@ ul {
 .ranking-tabs {
   display: flex;
   gap: 3rem;
-  /* Spacing between tabs */
   margin-bottom: var(--spacing-xxl);
   border-bottom: 1px solid #E0E0E0;
-  /* Full width line */
   padding-bottom: 0;
   position: relative;
 }
@@ -1674,13 +1298,11 @@ ul {
   border: none;
   font-size: 0.9rem;
   color: #999;
-  /* Inactive color */
   cursor: pointer;
   padding-bottom: 10px;
   position: relative;
   transition: color 0.3s;
   font-weight: 500;
-  /* Reset previous styles */
   border-radius: 0;
 }
 
@@ -1695,7 +1317,6 @@ ul {
   content: '';
   position: absolute;
   bottom: -1px;
-  /* Overlap the border-bottom */
   left: 0;
   width: 100%;
   height: 2px;
@@ -1708,18 +1329,14 @@ ul {
 
 /* Share product grid styles from New Arrivals */
 .ranking-grid {
-  /* Inherits .product-grid styles */
   margin-bottom: var(--spacing-xl);
 }
 
 /* View All Button */
 .view-all-container {
   display: flex;
-  /* justify-content: flex-end; */
   justify-content: center;
-  /* Centers horizontally */
   align-items: center;
-  /* Align right as per design */
   width: 100%;
 }
 
@@ -1730,9 +1347,7 @@ ul {
   gap: 1rem;
   padding: 1.2rem 3rem;
   border: 1px solid #A43424;
-  /* Primary red color */
   background-color: transparent;
-  /* Light bg inside button */
   color: #A43424;
   font-size: 0.9rem;
   font-weight: 700;
@@ -1749,24 +1364,11 @@ ul {
 .arrow-long {
   transition: transform 0.3s ease;
   width: 50px;
-  /* Adjust size */
   height: auto;
 }
 
 .view-all-btn:hover .arrow-long {
   transform: translateX(5px);
-}
-
-@media (max-width: 767px) {
-  .ranking-tabs {
-    gap: 1rem;
-    margin-bottom: var(--spacing-lg);
-  }
-
-  .view-all-container {
-    justify-content: center;
-    /* Center on mobile */
-  }
 }
 
 /* ============================================
@@ -1818,7 +1420,6 @@ ul {
 
 .column-content {
   padding: var(--spacing-sm) 0 0 0;
-  /* Padding top only */
 }
 
 .column-meta {
@@ -1837,7 +1438,6 @@ ul {
   font-size: 0.8rem;
   font-weight: 700;
   font-family: sans-serif;
-  /* Monospace or numeric font if preferred */
   color: var(--text-dark);
   margin-bottom: 10px;
 }
@@ -1863,12 +1463,6 @@ ul {
 .column-excerpt {
   display: none;
   /* Hide excerpt as per design */
-}
-
-@media (max-width: 767px) {
-  .column-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ============================================
@@ -1933,16 +1527,6 @@ ul {
 .news-item > span{
   width: fit-content;
 }
-@media (max-width: 767px) {
-  .news-item {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
-
-  .news-date {
-    min-width: auto;
-  }
-}
 
 /* ============================================
    Shop List Section
@@ -1950,15 +1534,11 @@ ul {
 .shoplist {
   background-color: #EEEAE6;
   margin-bottom: 0;
-  /* Flush with footer if needed */
 }
 
-/* Remove default section bg if set on .section elsewhere, 
-   or ensure this specific block is clean */
 .shoplist-wrapper {
   position: relative;
   width: 100%;
-  /* Specific height for banner feel */
   overflow: hidden;
 }
 
@@ -2008,21 +1588,9 @@ ul {
   height: auto;
 }
 
-@media (max-width: 767px) {
-  .shoplist-wrapper {
-    height: auto;
-    /* Allow height to grow with image */
-  }
-
-  .shoplist-title {
-    font-size: 1.5rem;
-  }
-}
-
 /* ============================================
    Shop List Section Styles
    ============================================ */
-
 .section-shoplist{
   padding: 0 var(--spacing-xxxl);
 }
@@ -2110,12 +1678,8 @@ ul {
   border-color: #F3F0EF;
   display: block;
   filter: brightness(0) invert(1);
-
-  /* Initial hidden state (right → left clip) */
   clip-path: inset(0 100% 0 0);
-
   transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-
   object-fit: cover;
 }
 
@@ -2130,20 +1694,6 @@ ul {
   /* Move to end */
 }
 
-@media (max-width: 767px) {
-  .shoplist-title {
-    font-size: 1.4rem;
-  }
-
-  .shoplist-arrow-wrapper {
-    bottom: 20px;
-    right: 20px;
-  }
-}
-
-/* ============================================
-   Footer
-   ============================================ */
 /* ============================================
    Footer
    ============================================ */
@@ -2312,6 +1862,48 @@ ul {
   padding-bottom:var(--spacing-sm);
 }
 
+@media (max-width: 1023px) {
+  .hero-nav {
+    gap: var(--spacing-md);
+    font-size: var(--font-size-xs);
+  }
+
+  .hero-actions {
+    gap: var(--spacing-sm);
+  }
+
+  .hero-action-link {
+    font-size: 0.7rem;
+  }
+
+  .hero-overlay-left {
+    left: 20px;
+    bottom: 10%;
+    max-width: 400px;
+  }
+
+  .hero-title {
+    font-size: var(--font-size-xl);
+  }
+
+  /* new arrival */
+
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Remove horizontal scrolling for better responsiveness matching design */
+    display: grid;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: var(--spacing-md);
+  }
+
+  .product-card {
+    flex: 0 0 auto;
+    scroll-snap-align: none;
+    min-width: 0;
+  }
+}
+
 @media (max-width: 900px) {
   .footer-inner {
     flex-direction: column;
@@ -2320,12 +1912,284 @@ ul {
 }
 
 @media (max-width: 767px) {
+  /* utility-bar setting */
+
+  .utility-bar {
+    height: var(--utility-bar-height-sp);
+  }
+
+  .utility-text {
+    font-size: 0.65rem;
+  }
+
+  /* header section*/
+  .section-header h2 {
+    font-size: var(--font-size-lg);
+  }
+
+  .section-header {
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* hero section */
+
+  .hero-header-inner {
+    flex-wrap: wrap;
+  }
+
+  .hero-nav {
+    display: none;
+  }
+
+  .hero-nav.active,
+  .hero-actions.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: var(--spacing-md);
+    margin-top: var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+  }
+
+  .hero-overlay-left {
+    position: absolute;
+    bottom: 60px;
+    left: 20px;
+    right: 20px;
+    top: auto;
+    transform: none;
+    padding: 0;
+    background-color: transparent;
+    max-width: calc(100% - 40px);
+    margin-top: 0;
+  }
+
+  .hero-description {
+    font-size: 0.8rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-cta {
+    font-size: 0.75rem;
+  }
+  
+  .site-header.scrolled {
+    top: var(--utility-bar-height-sp);
+  }
+
+  .site-header.scrolled .mobile-menu-toggle {
+    /* position: absolute; */
+    left: 20px;
+  }
+
+  .site-header.scrolled .hero-actions {
+    display: flex;
+    /* Show icons in mobile sticky bar */
+    /* position: absolute; */
+    right: 20px;
+  }
+
+  .site-header.scrolled .hero-logo {
+    filter: invert(1) brightness(0.2);
+    /* Make MainLOGO.png black on mobile scrolled state */
+  }
+
+  .hero-title {
+    font-size: var(--font-size-lg);
+  }
+
+  .hero-description,
+  .hero-subtitle {
+    font-size: var(--font-size-sm);
+  }
+
+  .hero-badge {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  /* campaign section */
+
+  .campaign {
+    width: 375px;
+    height: 774px;
+  }
+
+  .campaign-item {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .campaign-controls-footer {
+    padding: 15px 20px;
+  }
+
+  .campaign-carousel {
+    gap: var(--spacing-sm);
+  }
+
+  .carousel-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 28px;
+  }
+
+  .carousel-footer {
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-sm);
+  }
+
+  .carousel-tag {
+    font-size: var(--font-size-xs);
+  }
+
+  .campaign-item {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  /* topic section */
+
+  .section-topics{
+    padding: 0 2rem;
+  }
+
+  .topics-wrapper {
+    flex-direction: column;
+  }
+
+  .topic-left,
+  .topic-right {
+    width: 100%;
+  }
+
+  /* new arrival section */
+
+  .product-grid {
+    gap: var(--spacing-sm);
+    row-gap: var(--spacing-lg);
+  }
+
+  /* about-hero section */
+
+  .about-hero {
+    height: 500px;
+  }
+
+  .about-overlay-content {
+    padding: var(--spacing-lg);
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-text {
+    font-size: 0.8rem;
+  }
+
+  /* category section */
+  .category-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Stack vertically on mobile */
+    gap: var(--spacing-sm);
+  }
+
+  .category-item:nth-child(n) {
+    grid-column: span 1;
+    /* Reset spans */
+  }
+
+  /* ranking-tabs section */
+
+  .ranking-tabs {
+    gap: 1rem;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .view-all-container {
+    justify-content: center;
+  }
+
+
+  /* column-grid section */
+  .column-grid {
+    display: -webkit-box;
+    overflow-x: auto;
+  }
+
+  .column-card{
+    width: 75%;
+  }
+
+  /* news section */
+  .news-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .news-date {
+    min-width: auto;
+  }
+
+  /* shoplist section */
+
+  .shoplist {
+    padding: 0 1.5rem 3rem;
+  }
+
+  .shoplist-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 4;
+  }
+
+  .shoplist-title {
+    font-size: 1.5rem;
+  }
+
+  .shoplist-arrow-wrapper {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .shoplist-arrow {
+    width: 40px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  /* footer section */
   .site-footer {
     padding: var(--spacing-xl) 0;
   }
 
   .footer-inner {
     flex-direction: column;
+    align-items: center;
     padding: 0 var(--spacing-lg);
   }
 
@@ -2335,6 +2199,7 @@ ul {
 
   .footer-content-right {
     flex-direction: column;
+    align-items: flex-end;
     gap: var(--spacing-xl);
     width: 100%;
   }
@@ -2350,8 +2215,6 @@ ul {
     /* Below links if desired, or switch */
   }
 
-
-
   .footer-copyright {
     text-align: center;
     padding: 0;
@@ -2359,26 +2222,91 @@ ul {
   }
 }
 
-@media (max-width: 767px) {
-
-  /* Shoplist Overrides */
-  .shoplist {
-    padding: 0 1.5rem 3rem;
+@media (min-width: 375px){
+  /* hero selection */
+  
+  .hero-actions{
+    display: flex;
   }
 
-  .shoplist-wrapper {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 4;
+  .hero-header{
+    padding: 15px 22px;
   }
 
-  .shoplist-title {
-    font-size: 1.5rem;
+  .hero-header-inner{
+    align-items: normal;
   }
 
-  .shoplist-arrow {
-    width: 40px;
-    bottom: 20px;
-    right: 20px;
+  .hero-actions {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .hero-logo{
+    margin-top: 4px;
+  }
+
+  .hero-overlay-left{
+    max-width: calc(100% - 207px);
+    bottom: 32px;
+  }
+
+  .hero-title{
+    font-size: 12px;
+  }
+
+  .hero-description{
+    font-size: 10px;
+  }
+
+  .hero-badge img{
+    max-width: 110px;
+  }
+
+  .hero-cta{
+    width: 80%;    
+    padding-bottom: 12px;
+  }
+
+  .hero-header-inner{
+    gap: 0;
+  }
+
+  .cta-arrow{
+    max-width: 70%;
+    top: 7px;
+  }
+  .site-header.scrolled{
+    padding-top: 15px;
+  }
+  .mobile-menu-toggle{
+    margin-right: 60px;
+  }
+
+  .read-more{
+    bottom: 10px;
+    left: 0;
+  }
+
+  /* news selection */
+  
+  .section-news{
+    padding: 0;
+  }
+
+  /* campaign section */
+  .carousel-footer-info{
+    gap: 0;
+  }
+
+  /* topics section */
+  .section-topics{
+    /* padding: 0 1rem; */
+  }
+
+  /* shopist section */
+
+  .section-shoplist{
+    padding: 0;
   }
 }

@@ -79,6 +79,9 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- Sticky Header ---
   const header = document.querySelector('.site-header');
   const heroSection = document.querySelector('.hero');
+  const logo = document.getElementById('heroLogo');
+  const defaultSrc = 'assets/img/MainLOGO.png';
+  const scrolledSrc = 'assets/img/LOGO.png';
 
   if (header && heroSection) {
     const heroHeight = heroSection.offsetHeight;
@@ -86,8 +89,10 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', () => {
       if (window.scrollY > heroHeight - 100) { // Start sticking a bit before end of hero
         header.classList.add('scrolled');
+        logo.src = scrolledSrc;
       } else {
         header.classList.remove('scrolled');
+        logo.src = defaultSrc;
       }
     });
   }
@@ -302,5 +307,25 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // Ranking-tabs button switch functionality
+  const tabButtons = document.querySelectorAll('.ranking-tabs .tab-btn');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  //Footer, when the button clieked, the text changed
+  const form = document.querySelector('.newsletter-form');
+  const button = document.querySelector('.newsletter-btn');
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault(); // prevent page reload
+    button.textContent = '登録を完了しました!';
+    button.disabled = true; // optional: prevent re-click
+  });
 });
 
