@@ -1901,6 +1901,10 @@ ul {
   display: none !important;
 }
 
+.mobile-menu-toggle{
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .hero-nav {
     gap: var(--spacing-md);
@@ -1949,9 +1953,6 @@ ul {
     gap: var(--spacing-xl);
   }
 
-  .mobile-menu-toggle{
-    display: none;
-  }
 }
 
 @media (max-width: 768px) {
