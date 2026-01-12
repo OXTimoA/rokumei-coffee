@@ -812,6 +812,7 @@ ul {
 .section-campaign{
   display: flex;
   flex-direction: column;
+  padding: 100px 0;
   gap: 60px;
 }
 
@@ -865,8 +866,6 @@ ul {
 }
 
 .campaign-item img {
-  width: 450px;
-  height: 450px;
   object-fit: cover;
   display: block;
 }
@@ -1481,11 +1480,12 @@ ul {
    News Section
    ============================================ */
 .section-news{
+  width: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 25.0625rem;
+  /* padding: 0 25.0625rem; */
 }
 
 .news-list{
@@ -1496,12 +1496,12 @@ ul {
 
 .news-item{
   display: flex;
-  gap: 79px;
+  gap: 5.65rem;
 }
 
 .news-date,
 .news-text {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-lg);
   line-height: 1.6;
   position: relative;
   display: inline-block;
@@ -1743,12 +1743,12 @@ ul {
 
 .footer-logo {
   font-size: 3.125rem;
-  font-weight: 900;
+  font-weight: 400;
   /* Serif feel? */
   margin: 0;
   font-family: Rahere Roman Display;
   /* If branding uses Rahere Roman Display */
-  line-height: 80px;
+  line-height: 45px;
   color: #020202;
 }
 
@@ -1827,7 +1827,7 @@ ul {
 }
 
 .footer-newsletter {
-  width: 330px;
+  width: fit-content;
 }
 
 .newsletter-title {
@@ -1945,12 +1945,77 @@ ul {
     scroll-snap-align: none;
     min-width: 0;
   }
+
+  /* campaign section */
+  .campaign {
+    width: 100%;
+    height: auto;
+    padding: 0 40px;
+  }
+
+  .campaign-item {
+    flex: 0 0 calc(100% / 3);
+    width: calc(100% / 3);
+  }
+
+  .carousel-footer-info {
+    gap: 180px;
+  }
+
+  /* news section */
+  .news-item{
+    gap: 4rem;
+  }
+  .news-date, .news-text{
+    font-size: var(--spacing-base);
+  }
+
+  /* footer section */
+  .footer-logo{
+    line-height: 45px;
+  }
+
 }
 
 @media (max-width: 900px) {
+
+  /* hero section */
+  .hero-nav-actions{
+    gap: 30px;
+  }
+
+  /* campaign section */
+  .campaign {
+    width: 100%;
+    height: auto;
+    padding: 0 32px;
+  }
+
+  .campaign-item {
+    flex: 0 0 calc(100% / 2);
+    width: calc(100% / 2);
+  }
+
+  .carousel-footer-info {
+    gap: 120px;
+  }
+
+  /* news section */
+
+  .news-item {
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  /* footer section */
   .footer-inner {
-    flex-direction: column;
-    gap: var(--spacing-xl);
+    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-sm);
+  }
+
+  .footer-logo {
+    font-size: 2.8rem;
+    line-height: 38px;
   }
 
 }
@@ -2079,46 +2144,35 @@ ul {
     right: 1rem;
   }
 
+  .hero-badge img{
+    max-width: 140px;
+  }
+
   /* campaign section */
 
   .campaign {
-    width: 375px;
-    height: 774px;
+    width: 100%;
+    height: auto;
+    padding: 0 24px;
+  }
+
+  .section-campaign {
+    gap: 40px;
   }
 
   .campaign-item {
-    flex: 0 0 100%;
-    width: 100%;
-    padding: 0;
+    flex: 0 0 50%;
+    width: 50%;
+    padding: 0 8px;
   }
 
   .campaign-controls-footer {
-    padding: 15px 20px;
+    padding: 24px;
   }
 
-  .campaign-carousel {
-    gap: var(--spacing-sm);
-  }
-
-  .carousel-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 28px;
-  }
-
-  .carousel-footer {
-    gap: var(--spacing-sm);
-    margin-top: var(--spacing-sm);
-  }
-
-  .carousel-tag {
-    font-size: var(--font-size-xs);
-  }
-
-  .campaign-item {
-    flex: 0 0 100%;
-    width: 100%;
-    padding: 0;
+  .carousel-footer-info {
+    gap: 80px;
+    font-size: 13px;
   }
 
   /* topic section */
@@ -2173,6 +2227,10 @@ ul {
     /* Reset spans */
   }
 
+  .category-item-5{
+    width: calc(200% + var(--spacing-sm));
+  }
+
   /* ranking-tabs section */
 
   .ranking-tabs {
@@ -2196,13 +2254,18 @@ ul {
   }
 
   /* news section */
+
   .news-item {
-    flex-direction: column;
-    gap: 0.25rem;
+    flex-direction: row;
+    gap: 2rem;
   }
 
-  .news-date {
-    min-width: auto;
+  .news-date,
+  .news-text {
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    position: relative;
+    display: inline-block;
   }
 
   /* shoplist section */
@@ -2240,11 +2303,7 @@ ul {
   .footer-inner {
     flex-direction: column;
     align-items: center;
-    padding: 0 var(--spacing-lg);
-  }
-
-  .footer-logo {
-    font-size: 2rem;
+    padding: 0 var(--spacing-xs);
   }
 
   .footer-content-right {
@@ -2272,7 +2331,7 @@ ul {
   }
 }
 
-@media (min-width: 375px) and (max-width: 767px){
+@media (min-width: 375px) and (max-width: 500px){
   /* hero selection */
   
   .hero-actions{
@@ -2342,13 +2401,62 @@ ul {
   }
 
   /* campaign section */
-  .carousel-footer-info{
-    gap: 0;
+
+
+  .campaign {
+    width: 100%;
+    height: auto;
+    padding: 0 16px;
+  }
+
+  .section-campaign {
+    gap: 32px;
+  }
+
+  .campaign-carousel-inner {
+    height: auto;
+  }
+
+  .campaign-slider {
+    transition: transform 0.4s ease;
+  }
+
+  .campaign-item {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .campaign-item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .campaign-controls-footer {
+    padding: 16px;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .carousel-footer-info {
+    flex-direction: row;
+    gap: 40px;
+    align-items: center;
+    text-align: center;
+  }
+
+  .carousel-btn {
+    padding: 6px;
   }
 
   /* topics section */
   .section-topics{
     /* padding: 0 1rem; */
+  }
+
+  /* category section */
+  .section-category{
+    padding: 0 var(--spacing-md)
   }
 
   /* shopist section */
