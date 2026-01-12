@@ -1121,52 +1121,72 @@ ul {
 /* ============================================
    About Section
    ============================================ */
-.about {
-  padding: 0;
-  width: 100%;
-}
-
-.about-hero {
-  position: relative;
-  width: 100%;
-  height: 775px;
-  overflow: hidden;
-}
-
-.about-bg {
-  object-fit: cover;
-}
-
-.about-overlay-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding: var(--spacing-xl);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.about-title {
-  font-size: 3rem;
-  font-weight: 400;
-  width: max-content;
-  letter-spacing: 0.1em;
-  color: var(--bg-white);
-  line-height: 1.2;
-  font-family: serif;
-}
-
-.about-text {
-  font-size: 0.9rem;
-  line-height: 1.8;
-  color: var(--bg-white);
-  max-width: 600px;
-  margin-top: auto;
-  /* Push to bottom if flex space allows, or use absolute positioning if strictly needed */
-}
+   .about {
+    padding: 0;
+    width: 100%;
+  }
+  
+  /* Sticky container */
+  .about-hero {
+    position: relative;
+    width: 100%;
+    height: 775px;
+    overflow: hidden;
+  }
+  
+  /* Each slide */
+  .sticky-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    will-change: clip-path;
+  }
+  
+  /* Images */
+  .about-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Overlay text */
+  .about-overlay-content {
+    position: absolute;
+    inset: 0;
+    padding: 160px var(--spacing-xl) var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .about-title {
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #fff;
+    line-height: 1.2;
+    font-family: serif;
+  }
+  
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #fff;
+    max-width: 600px;
+  }
+  
+  /* Initial states */
+  #slideA {
+    clip-path: inset(0 0 0 0);
+    z-index: 2;
+  }
+  
+  #slideB {
+    clip-path: inset(0 0 100% 0);
+    z-index: 1;
+  }
+  
 
 /* ============================================
    Category Section
@@ -1541,170 +1561,122 @@ ul {
 }
 
 /* ============================================
-   Shop List Section
+   Shop List Section – Base
    ============================================ */
-.shoplist {
-  background-color: #EEEAE6;
-  margin-bottom: 0;
-}
-
-.shoplist-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-}
-
-.shoplist-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  margin: 0;
-}
-
-.shoplist-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.2);
-  /* Slight overlay */
-}
-
-.shoplist-title {
-  color: #fff;
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.shoplist-arrow {
-  position: absolute;
-  bottom: 40px;
-  right: 5%;
-  z-index: 10;
-  width: 60px;
-}
-
-.shoplist-arrow svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* ============================================
-   Shop List Section Styles
-   ============================================ */
-.section-shoplist{
-  padding: 0 var(--spacing-xxxl);
-}
-.shoplist-link {
-  display: block;
-  width: 100%;
-  text-decoration: none;
-}
-
-.shoplist-wrapper {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  /* Required for zoom effect */
-}
-
-.shoplist-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  /* Smooth zoom easing */
-}
-
-/* Hover Effect: Zoom Image */
-.shoplist-link:hover .shoplist-image {
-  transform: scale(1.03);
-}
-
-.shoplist-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.shoplist-title {
-  color: #fff;
-  font-size: 1.8rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  font-family: sans-serif;
-  text-transform: uppercase;
-  margin: 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-/* Arrow Animation Wrapper */
-.shoplist-arrow-wrapper {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  width: 88px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  pointer-events: none;
-  z-index: 5;
-}
-
-.shoplist-line {
-  position: absolute;
-  bottom: 0px;
-  right: 0;
-  width: 40px;
-  height: 1px;
-  background-color: #fff;
-  display: none;
-  transition: width 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-.shoplist-arrow-icon {
-  position: absolute;
-  bottom: -3px;
-  right: 20px;
-  width: 84px;
-  height: auto;
-  pointer-events: none;
-  border-color: #F3F0EF;
-  display: block;
-  filter: brightness(0) invert(1);
-  clip-path: inset(0 100% 0 0);
-  transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
-  object-fit: cover;
-}
-
-/* Hover Effect: Arrow Animation */
-.shoplist-link:hover .shoplist-line {
-  width: 60px;
-}
-
-.shoplist-link:hover .shoplist-arrow-icon {
-  clip-path: inset(0 0 0 0);
-  opacity: 1;
-  /* Move to end */
-}
+   .shoplist {
+    background-color: #EEEAE6;
+    margin-bottom: 0;
+  }
+  
+  .section-shoplist {
+    padding: 0 var(--spacing-xxxl);
+  }
+  
+  .shoplist-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+  }
+  
+  /* ============================================
+     Wrapper & Image
+     ============================================ */
+  .shoplist-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Required for zoom effect */
+  }
+  
+  .shoplist-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    margin: 0;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  /* Image Hover Zoom */
+  .shoplist-link:hover .shoplist-image {
+    transform: scale(1.03);
+  }
+  
+  /* ============================================
+     Overlay & Title
+     ============================================ */
+  .shoplist-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    z-index: 5;
+  }
+  
+  .shoplist-title {
+    color: #fff;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* ============================================
+     Arrow Animation
+     ============================================ */
+  .shoplist-arrow-wrapper {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 88px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    z-index: 5;
+  }
+  
+  .shoplist-line {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 40px;
+    height: 1px;
+    background-color: #fff;
+    display: none;
+    transition: width 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  
+  .shoplist-arrow-icon {
+    position: absolute;
+    bottom: -3px;
+    right: 20px;
+    width: 84px;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    object-fit: cover;
+    filter: brightness(0) invert(1);
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  
+  /* Arrow Hover Animation */
+  .shoplist-link:hover .shoplist-line {
+    width: 60px;
+  }
+  
+  .shoplist-link:hover .shoplist-arrow-icon {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  
 
 /* ============================================
    Footer
@@ -2014,7 +1986,7 @@ ul {
   }
 
   .footer-logo {
-    font-size: 2.8rem;
+    font-size: 3rem;
     line-height: 38px;
   }
 
@@ -2204,7 +2176,7 @@ ul {
   }
 
   .about-overlay-content {
-    padding: var(--spacing-lg);
+    padding: 10rem var(--spacing-lg) var(--spacing-lg);
   }
 
   .about-title {
@@ -2270,10 +2242,6 @@ ul {
 
   /* shoplist section */
 
-  .shoplist {
-    padding: 0 1.5rem 3rem;
-  }
-
   .shoplist-wrapper {
     width: 100%;
     height: auto;
@@ -2303,7 +2271,7 @@ ul {
   .footer-inner {
     flex-direction: column;
     align-items: center;
-    padding: 0 var(--spacing-xs);
+    padding: 0 var(--spacing-md);
   }
 
   .footer-content-right {
@@ -2320,7 +2288,7 @@ ul {
 
   .footer-newsletter {
     width: 100%;
-    order: 2;
+    order:   2;
     /* Below links if desired, or switch */
   }
 
@@ -2402,7 +2370,6 @@ ul {
 
   /* campaign section */
 
-
   .campaign {
     width: 100%;
     height: auto;
@@ -2461,7 +2428,16 @@ ul {
 
   /* shopist section */
 
+  .shoplist {
+    padding: 0 1.5rem 3rem;
+  }
+
   .section-shoplist{
     padding: 0;
+  }
+
+  /* footer section */
+  .footer-logo {
+    font-size: 2.7rem;
   }
 }
