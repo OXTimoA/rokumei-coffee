@@ -382,6 +382,11 @@
   font-weight: bold;
   line-height: 20px;
   margin-bottom: 10px;
+  transition: text-decoration 0.3s ease;
+}
+.goods .goods-item .name p {
+  margin: 0;
+  padding: 0;
 }
 .goods .goods-item .price {
   text-align: center;
@@ -389,11 +394,21 @@
   font-weight: bold;
   color: #858585;
   line-height: 16px;
+  transition: text-decoration 0.3s ease;
+}
+.goods .goods-item .price p {
+  margin: 0;
+  padding: 0;
 }
 .goods .goods-item .price span {
   font-size: 10px;
   font-weight: normal;
   color: #858585;
+}
+.goods .goods-item:hover .name p,
+.goods .goods-item:hover .price p {
+  text-decoration: underline;
+  text-decoration-color: #000000;
 }
 
 /* ----- Recently Viewed Slider ------- */
@@ -436,6 +451,11 @@
 }
 .new-sp-list .slider-track .goods-item:hover .img img {
   transform: scale(1.3);
+}
+.new-sp-list .slider-track .goods-item:hover .name p,
+.new-sp-list .slider-track .goods-item:hover .price p {
+  text-decoration: underline;
+  text-decoration-color: #000000;
 }
 .new-sp-list .slider-arrow {
   transition: background-color 0.2s;
