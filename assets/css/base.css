@@ -1,0 +1,112 @@
+/* ============================================
+   CSS Variables
+   ============================================ */
+:root {
+  --primary-red: #a43424;
+  --bg-beige: #f9f8f6;
+  --bg-white: #ffffff;
+  --text-dark: #1a1a1a;
+  --text-gray: #5b5b5b;
+  --border-gray: #e5e5e5;
+  --max-width-desktop: 1280px;
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  /* --spacing-ssm: 1.25rem; */
+  --spacing-md: 1.5rem;
+  /* --spacing-mmd: 1.75rem; */
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-xxl: 4rem;
+  --spacing-xxxl: 7rem;
+
+  /* Typography */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+  --font-size-xxl: 2rem;
+
+  /* Section Title */
+  --section-title-size: 1.25rem;
+  --section-title-weight: 700;
+  --section-title-spacing: 0.1em;
+
+  /* Sticky Header heights - Approximate based on font size + padding */
+  --utility-bar-height-pc: 40px;
+  --utility-bar-height-sp: 36px;
+}
+
+@font-face {
+  font-family: "FOT-TsukuGo Pro";
+  src: url("../fonts/e3da745a5b16d298d498b0e591ad7f90.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "TsukuGoPro", sans-serif;
+}
+html,
+body {
+  min-width: 375px;
+}
+
+html {
+  font-size: 14px;
+  scroll-behavior: smooth;
+}
+
+body {
+  color: #000000;
+  background-color: #f3f0ef;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+main,
+header,
+footer,
+section {
+  width: 100%;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+a {
+  color: #000000;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul {
+  list-style: none;
+}
+
+.is-md-show {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .is-md-show {
+    display: block;
+  }
+  .is-md-hide {
+    display: none !important;
+  }
+}

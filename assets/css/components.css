@@ -1,0 +1,19 @@
+.side-bar {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 45px;
+}
+.side-bar a {
+  font-size: 12px;
+  font-weight: 500;
+}
+@media (max-width: 768px) {
+  .side-bar {
+    padding: 20px 22px;
+  }
+  .side-bar a {
+    font-size: 10px;
+  }
+}
