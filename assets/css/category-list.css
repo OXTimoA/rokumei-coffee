@@ -361,6 +361,21 @@
   flex-direction: column;
   gap: 10px;
 }
+.goods .goods-item .img {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.goods .goods-item .img img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1);
+}
+.goods .goods-item:hover .img img {
+  transform: scale(1.05);
+}
 .goods .goods-item .name {
   text-align: center;
   font-size: 14px;
@@ -409,11 +424,18 @@
 }
 .new-sp-list .slider-track .goods-item .img {
   width: 100%;
+  overflow: hidden;
+  position: relative;
 }
 .new-sp-list .slider-track .goods-item .img img {
   width: 100%;
   height: auto;
   display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transform: scale(1);
+}
+.new-sp-list .slider-track .goods-item:hover .img img {
+  transform: scale(1.3);
 }
 .new-sp-list .slider-arrow {
   transition: background-color 0.2s;
