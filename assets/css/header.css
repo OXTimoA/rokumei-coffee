@@ -36,6 +36,24 @@ header .header-container {
 .header-container .nav-group .links a {
   font-size: 14px;
   font-weight: 700;
+  position: relative;
+  text-decoration: none;
+  color: #000000;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.header-container .nav-group .links a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background-color: #000000;
+  transition: width 0.3s ease;
+}
+.header-container .nav-group .links a:hover::after {
+  width: 100%;
 }
 .header-container .nav-group .r-links {
   display: flex;
