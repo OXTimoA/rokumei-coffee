@@ -46,6 +46,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Rahere Roman Display";
+  src: url("../fonts/demo-rahereromandisplay-regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* --- all basic style --- */
 
 * {

@@ -1,0 +1,166 @@
+.fv {
+  width: 100%;
+  height: 530px;
+  background: url("../img/shop-list-all/fv.png") no-repeat center / cover;
+  position: relative;
+}
+.fv .fv-title {
+  position: absolute;
+  left: 45px;
+  bottom: 36px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 42px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.fv .fv-title span {
+  font-size: 14px;
+  font-weight: normal;
+}
+.fv-btm-txt {
+  padding-block: 100px;
+}
+.fv-btm-txt p {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .fv {
+    height: 375px;
+  }
+  .fv .fv-title {
+    font-size: 25px;
+    left: 25px;
+    bottom: 15px;
+  }
+  .fv-btm-txt {
+    padding: 50px 22px;
+  }
+  .fv-btm-txt p {
+    font-size: 12px;
+    max-width: 100%;
+  }
+}
+/* ------- Shop List All -------- */
+.shop-list {
+  padding-block: 130px 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+}
+.shop-list .area-box {
+  width: 100%;
+  max-width: 1190px;
+}
+.area-box .area-title {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.area-box .shop-group {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 10px;
+  row-gap: 50px;
+}
+.area-box .shop-group .shop-item {
+  width: 290px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: #ece8e6;
+  border-radius: 5px;
+  padding-bottom: 52px;
+}
+.area-box .shop-group .shop-item .shop-img {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+}
+.area-box .shop-group .shop-item .shop-img img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+.area-box .shop-group .shop-item:hover .shop-img img {
+  transform: scale(1.03);
+}
+.area-box .shop-item .shop-info .shop-name {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 13px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 2px;
+}
+.area-box .shop-item .shop-info .shop-name::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #000000;
+  transform: scaleX(0);
+  transform-origin: right top;
+  transition: transform 0.3s ease;
+}
+.area-box .shop-group .shop-item:hover .shop-info .shop-name::after {
+  transform: scaleX(1);
+  transform-origin: left top;
+}
+.area-box .shop-item .shop-info {
+  padding: 10px 20px;
+}
+.area-box .shop-item .shop-info .shop-address {
+  font-size: 10px;
+  font-weight: bold;
+}
+.area-box .shop-item .shop-tips {
+  display: flex;
+  gap: 5px;
+  padding-inline: 20px;
+}
+.area-box .shop-item .shop-tips p {
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  padding: 5px;
+  background-color: #a72813;
+}
+
+@media (max-width: 1210px) {
+  .shop-list {
+    padding: 100px 22px;
+  }
+}
+@media (max-width: 768px) {
+  .area-box .shop-group .shop-item {
+    width: 160px;
+    border-radius: 0;
+    background-color: transparent;
+    padding-bottom: 0;
+    gap: 17px;
+  }
+  .area-box .shop-group .shop-item .shop-img {
+    border-radius: 0;
+  }
+  .area-box .shop-item .shop-info {
+    padding: 0;
+  }
+  .area-box .shop-item .shop-tips {
+    padding: 0;
+    flex-direction: column;
+  }
+  .area-box .shop-item .shop-tips p {
+    width: fit-content;
+  }
+}

@@ -47,13 +47,16 @@ header .header-container {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
+  width: 100%;
   height: 1px;
   background-color: #000000;
-  transition: width 0.3s ease;
+  transform: scaleX(0);
+  transform-origin: right top;
+  transition: transform 0.3s ease;
 }
 .header-container .nav-group .links a:hover::after {
-  width: 100%;
+  transform: scaleX(1);
+  transform-origin: left top;
 }
 .header-container .nav-group .r-links {
   display: flex;

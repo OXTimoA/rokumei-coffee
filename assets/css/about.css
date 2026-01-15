@@ -1,0 +1,49 @@
+.fv {
+  width: 100%;
+  height: 530px;
+  background: url("../img/about/fv.png") no-repeat center / cover;
+  position: relative;
+}
+.fv .fv-title {
+  position: absolute;
+  left: 45px;
+  bottom: 36px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 42px;
+  font-weight: bold;
+  color: #ffffff;
+}
+.fv .fv-title span {
+  font-size: 14px;
+  font-weight: normal;
+}
+.fv-btm-txt {
+  padding-block: 100px;
+}
+.fv-btm-txt p {
+  width: 100%;
+  max-width: 640px;
+  margin: auto;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .fv {
+    height: 375px;
+  }
+  .fv .fv-title {
+    font-size: 25px;
+    left: 25px;
+    bottom: 15px;
+  }
+  .fv-btm-txt {
+    padding: 50px 22px;
+  }
+  .fv-btm-txt p {
+    font-size: 12px;
+    max-width: 100%;
+  }
+}
