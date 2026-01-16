@@ -1,0 +1,361 @@
+.fv {
+  max-width: 1028px;
+  margin: auto;
+  padding-top: 45px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.fv .shop-info {
+  width: 100%;
+  max-width: 484px;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+.fv .shop-info .shop-name {
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.fv .shop-info .shop-type {
+  display: flex;
+  gap: 5px;
+}
+.fv .shop-info .shop-type p {
+  font-size: 10px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #a72813;
+  padding: 5px;
+}
+.fv .shop-info .shop-address-box {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.fv .shop-info .shop-address-box .item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.fv .shop-info .shop-address-box .item img {
+  width: auto;
+  height: 18px;
+}
+.fv .shop-info .shop-about {
+  font-size: 14px;
+  font-weight: 700;
+}
+.fv .shop-info .shop-about p:nth-of-type(1) {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+.fv .shop-img {
+  width: 100%;
+  max-width: 514px;
+}
+@media (max-width: 1100px) {
+  .fv {
+    padding-inline: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fv {
+    flex-direction: column-reverse;
+    gap: 30px;
+    padding-top: 0;
+  }
+  .fv .shop-img,
+  .fv .shop-info {
+    max-width: 100%;
+  }
+  .fv .shop-info .shop-name {
+    font-size: 25px;
+  }
+  .fv .shop-info .shop-address-box {
+    gap: 12px;
+  }
+  .fv .shop-info .shop-address-box .item,
+  .fv .shop-info .shop-about {
+    font-size: 12px;
+  }
+  .fv .shop-info .shop-about p:nth-of-type(1) {
+    font-size: 18px;
+  }
+}
+
+/* ------- Shop Detail -------- */
+.shop-detail {
+  padding-block: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+}
+.shop-detail .item {
+  width: 100%;
+  max-width: 640px;
+  padding-top: 20px;
+  border-top: 1px solid #000000;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.shop-detail .item p:nth-of-type(1) {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1100px) {
+  .shop-detail .item {
+    padding-inline: 22px;
+  }
+}
+@media (max-width: 768px) {
+  .shop-detail .item {
+    font-size: 12px;
+  }
+  .shop-detail .item p:nth-of-type(1) {
+    margin-bottom: 16px;
+  }
+}
+
+/* ------- Shop Menu -------- */
+.shop-menu {
+  padding-block: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+  background-color: #ece8e6;
+}
+.section-title {
+  font-size: 27px;
+  font-weight: bold;
+  text-align: center;
+}
+.category-group {
+  width: 100%;
+  max-width: 1028px;
+  margin-bottom: 30px;
+}
+.category-tabs {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #a5a5a5;
+}
+.category-tab {
+  width: 50%;
+  padding-bottom: 15px;
+  position: relative;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+  color: #a5a5a5;
+}
+.category-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #000000;
+  transition: width 0.3s ease;
+}
+.category-tab.active {
+  color: #000000;
+  font-weight: 700;
+}
+.category-tab.active::after {
+  width: 100%;
+}
+.category-tab:hover {
+  color: #000000;
+}
+.menu-list {
+  width: 100%;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  gap: 0;
+}
+.menu-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+.menu-dots {
+  flex: 1;
+  height: 1px;
+  background-image: radial-gradient(circle, #000000 1px, transparent 1px);
+  background-size: 4px 1px;
+  background-position: 0 center;
+  background-repeat: repeat-x;
+  min-width: 20px;
+  margin: 0 12px;
+  align-self: center;
+}
+.menu-price {
+  font-size: 16px;
+  font-weight: 700;
+  color: #a5a5a5;
+}
+.menu-price span {
+  font-size: 10px;
+}
+.intro-box {
+  width: 100%;
+  max-width: 1028px;
+  display: flex;
+  gap: 10px;
+}
+.intro-item {
+  width: 100%;
+  max-width: 509px;
+  position: relative;
+}
+.intro-item span {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  background-color: #a72813;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+  padding-inline: 5px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.intro-img {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.intro-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.intro-text {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 25px;
+}
+
+@media (max-width: 1100px) {
+  .menu-list,
+  .intro-box {
+    padding-inline: 22px;
+  }
+}
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 25px;
+  }
+  .category-group {
+    margin-bottom: 24px;
+  }
+  .category-tab {
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+  .menu-name {
+    font-size: 12px;
+  }
+  .menu-price {
+    font-size: 14px;
+  }
+  .intro-box {
+    flex-direction: column;
+    gap: 74px;
+  }
+  .intro-item {
+    max-width: 100%;
+  }
+  .intro-item span {
+    top: -24px;
+    height: 24px;
+  }
+  .intro-title {
+    font-size: 18px;
+  }
+  .intro-text {
+    font-size: 12px;
+  }
+}
+
+/* ------- Access -------- */
+.access {
+  padding-block: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 112px;
+}
+.access .access-box {
+  width: 100%;
+  max-width: 1028px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.access .access-box p {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.access .access-box .top-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.access .access-box iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+.access .access-box .btm-txt {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.access .access-box .btm-txt p {
+  width: fit-content;
+}
+
+@media (max-width: 1100px) {
+  .access {
+    padding-inline: 22px;
+  }
+}
+@media (max-width: 768px) {
+  .access {
+    gap: 43px;
+  }
+  .access .access-box {
+    gap: 20px;
+  }
+  .access .access-box p {
+    font-size: 12px;
+  }
+  .access .access-box .btm-txt {
+    flex-direction: column;
+  }
+}
+@media (max-width: 480px) {
+  .access .access-box p {
+    font-size: 10px;
+  }
+  .access .access-box .top-txt p:nth-of-type(1) {
+    font-size: 12px;
+  }
+}
