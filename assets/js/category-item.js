@@ -175,4 +175,44 @@ document.addEventListener("DOMContentLoaded", function () {
       reviewBox.classList.toggle("active");
     });
   }
+
+  // Sticky red bar on scroll
+  const stickyRedBar = document.getElementById("stickyRedBar");
+  const productSelection = document.getElementById("product-selection");
+  const redBarLink = stickyRedBar?.querySelector("a");
+
+  if (stickyRedBar && productSelection) {
+    // Get the initial position of the red bar
+    const redBarInitialTop = stickyRedBar.offsetTop;
+    const scrollThreshold = redBarInitialTop + stickyRedBar.offsetHeight;
+
+    function handleScroll() {
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      if (scrollY > scrollThreshold) {
+        stickyRedBar.classList.add("sticky");
+      } else {
+        stickyRedBar.classList.remove("sticky");
+      }
+    }
+
+    // Smooth scroll to product selection area
+    if (redBarLink) {
+      redBarLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        const headerHeight = document.querySelector("header")?.offsetHeight || 0;
+        const targetPosition = productSelection.offsetTop - headerHeight;
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      });
+    }
+
+    // Listen to scroll events
+    window.addEventListener("scroll", handleScroll);
+    // Initial check
+    handleScroll();
+  }
 });
