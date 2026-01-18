@@ -331,4 +331,7 @@
   .btm-content-container .btm-group .btm-item .txt-box .date {
     font-size: 10px;
   }
+  .c-reverse {
+    flex-direction: column-reverse;
+  }
 }
