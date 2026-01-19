@@ -2632,7 +2632,7 @@
 
   .campaign-sp-thumb-wrap {
     flex: 1;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
   }
 
@@ -2642,7 +2642,6 @@
     transition: transform 0.3s ease;
     will-change: transform;
     cursor: grab;
-    overflow-x: scroll;
   }
 
   .campaign-sp-thumb-track:active {
