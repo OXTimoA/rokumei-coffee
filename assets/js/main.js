@@ -327,5 +327,234 @@ document.addEventListener('DOMContentLoaded', function () {
     button.textContent = '登録を完了しました!';
     button.disabled = true; // optional: prevent re-click
   });
+
+  // --- SP Campaign Slider ---
+  const spMainSlider = document.querySelector('.campaign-sp-slider-wrap');
+  const spThumbTrack = document.querySelector('.campaign-sp-thumb-track');
+  const spThumbItems = document.querySelectorAll('.campaign-sp-thumb-item');
+  const spThumbPrev = document.querySelector('.campaign-sp-thumb-prev');
+  const spThumbNext = document.querySelector('.campaign-sp-thumb-next');
+  const spThumbWrap = document.querySelector('.campaign-sp-thumb-wrap');
+
+  if (spMainSlider && spThumbTrack && spThumbItems.length > 0) {
+    const mainSlides = spMainSlider.querySelectorAll('.campaign-sp-slider-item');
+    const totalSlides = mainSlides.length;
+    let currentMainIndex = 0;
+    let currentThumbIndex = 0;
+    let isTransitioning = false;
+    let autoScrollInterval;
+
+    // Clone slides for infinite loop
+    mainSlides.forEach((slide, index) => {
+      if (index === 0) {
+        // Clone first slide and append at end
+        const clone = slide.cloneNode(true);
+        spMainSlider.appendChild(clone);
+      }
+      if (index === totalSlides - 1) {
+        // Clone last slide and prepend at start
+        const clone = slide.cloneNode(true);
+        spMainSlider.insertBefore(clone, spMainSlider.firstChild);
+      }
+    });
+
+    // Now we have: [clone-last, original-1, original-2, ..., original-n, clone-first]
+    // Start at index 1 (first original)
+    currentMainIndex = 1;
+    spMainSlider.style.transition = 'none';
+    spMainSlider.style.transform = `translateX(-${currentMainIndex * 100}%)`;
+
+    // Update main slider position
+    function updateMainSlider(withTransition = true) {
+      if (withTransition) {
+        spMainSlider.style.transition = 'transform 0.5s ease-in-out';
+      } else {
+        spMainSlider.style.transition = 'none';
+      }
+      spMainSlider.style.transform = `translateX(-${currentMainIndex * 100}%)`;
+    }
+
+    // Update active thumbnail
+    function updateActiveThumbnail(index) {
+      spThumbItems.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
+      });
+      currentThumbIndex = index;
+    }
+
+    // Go to specific slide
+    function goToSlide(index, fromThumbnail = false) {
+      if (isTransitioning) return;
+      isTransitioning = true;
+
+      // Update main slider index
+      // Index 0 is clone, 1 to totalSlides are originals, totalSlides+1 is clone
+      currentMainIndex = index + 1; // +1 because first is clone
+      updateMainSlider(true);
+
+      // Update thumbnail if not called from thumbnail click
+      if (!fromThumbnail) {
+        updateActiveThumbnail(index);
+      }
+    }
+
+    // Next slide
+    function nextSlide() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentMainIndex++;
+      updateMainSlider(true);
+
+      // Update thumbnail index
+      currentThumbIndex = (currentThumbIndex + 1) % totalSlides;
+      updateActiveThumbnail(currentThumbIndex);
+    }
+
+    // Previous slide
+    function prevSlide() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      currentMainIndex--;
+      updateMainSlider(true);
+
+      // Update thumbnail index
+      currentThumbIndex = (currentThumbIndex - 1 + totalSlides) % totalSlides;
+      updateActiveThumbnail(currentThumbIndex);
+    }
+
+    // Handle transition end for infinite loop
+    spMainSlider.addEventListener('transitionend', () => {
+      isTransitioning = false;
+
+      // If we're at the clone at the end (index totalSlides + 1)
+      if (currentMainIndex === totalSlides + 1) {
+        spMainSlider.style.transition = 'none';
+        currentMainIndex = 1; // Jump to first original
+        updateMainSlider(false);
+      }
+
+      // If we're at the clone at the beginning (index 0)
+      if (currentMainIndex === 0) {
+        spMainSlider.style.transition = 'none';
+        currentMainIndex = totalSlides; // Jump to last original
+        updateMainSlider(false);
+      }
+    });
+
+    // Auto-scroll every 4 seconds
+    function startAutoScroll() {
+      stopAutoScroll();
+      autoScrollInterval = setInterval(() => {
+        nextSlide();
+      }, 4000);
+    }
+
+    function stopAutoScroll() {
+      clearInterval(autoScrollInterval);
+    }
+
+    startAutoScroll();
+
+    // Pause auto-scroll on hover
+    const spSliderContainer = document.querySelector('.campaign-sp-slider');
+    if (spSliderContainer) {
+      spSliderContainer.addEventListener('mouseenter', stopAutoScroll);
+      spSliderContainer.addEventListener('mouseleave', startAutoScroll);
+    }
+
+    // Thumbnail click handlers
+    spThumbItems.forEach((thumb, index) => {
+      thumb.addEventListener('click', () => {
+        goToSlide(index, true);
+        updateActiveThumbnail(index);
+        startAutoScroll(); // Restart auto-scroll
+      });
+    });
+
+    // Thumbnail navigation buttons
+    if (spThumbPrev) {
+      spThumbPrev.addEventListener('click', () => {
+        prevSlide();
+        startAutoScroll();
+      });
+    }
+
+    if (spThumbNext) {
+      spThumbNext.addEventListener('click', () => {
+        nextSlide();
+        startAutoScroll();
+      });
+    }
+
+    // Touch/swipe support for main slider
+    let isDragging = false;
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+
+    function getPositionX(e) {
+      return e.type.includes('mouse') ? e.pageX : e.touches[0].clientX;
+    }
+
+    function touchStart(e) {
+      if (isTransitioning) return;
+      isDragging = true;
+      startX = getPositionX(e);
+      spMainSlider.style.transition = 'none';
+      stopAutoScroll();
+
+      const style = window.getComputedStyle(spMainSlider);
+      const matrix = new WebKitCSSMatrix(style.transform);
+      currentTranslate = matrix.m41;
+      prevTranslate = currentTranslate;
+    }
+
+    function touchMove(e) {
+      if (!isDragging) return;
+      const currentX = getPositionX(e);
+      const diffX = currentX - startX;
+      spMainSlider.style.transform = `translateX(${prevTranslate + diffX}px)`;
+    }
+
+    function touchEnd() {
+      if (!isDragging) return;
+      isDragging = false;
+
+      const style = window.getComputedStyle(spMainSlider);
+      const matrix = new WebKitCSSMatrix(style.transform);
+      const finalTranslate = matrix.m41;
+      const movedBy = finalTranslate - prevTranslate;
+
+      const containerWidth = spMainSlider.parentElement.offsetWidth;
+
+      // Snap threshold: 20% of container width
+      if (Math.abs(movedBy) > containerWidth * 0.2) {
+        if (movedBy < 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      } else {
+        // Snap back to current position
+        updateMainSlider(true);
+      }
+
+      startAutoScroll();
+    }
+
+    // Mouse events for main slider
+    const mainSliderContainer = document.querySelector('.campaign-sp-main-slider');
+    if (mainSliderContainer) {
+      mainSliderContainer.addEventListener('mousedown', touchStart);
+      window.addEventListener('mousemove', touchMove);
+      window.addEventListener('mouseup', touchEnd);
+
+      // Touch events
+      mainSliderContainer.addEventListener('touchstart', touchStart, { passive: true });
+      window.addEventListener('touchmove', touchMove);
+      window.addEventListener('touchend', touchEnd);
+    }
+  }
+
 });
 

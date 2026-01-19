@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="ja">
 
 <head>
@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/base.css">
+  <link rel="stylesheet" href="./assets/css/style.css">
   <script src="assets/js/main.js" defer></script>
   <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
   <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
@@ -395,7 +395,7 @@
         <header class="section-header">
           <h2>CAMPAIGN</h2>
         </header>
-        <div class="campaign-carousel">
+        <div class="campaign-carousel is-md-hide">
           <div class="campaign-carousel-inner">
             <div class="campaign-slider-wrapper">
               <div class="campaign-slider">
@@ -429,6 +429,57 @@
                 <path d="M1 1L17 9L1 17" stroke="#000000" stroke-width="2" transform="rotate(0)" />
               </svg>
             </button>
+          </div>
+        </div>
+
+        <div class="campaign-sp-slider is-md-show">
+          <div class="sp-slider-wrap">
+            <div class="main-slide-box">
+              <div class="campaign-sp-main-slider">
+                <div class="campaign-sp-slider-wrap">
+                  <div class="campaign-sp-slider-item">
+                    <img src="assets/img/RC_EC_banner_07 1.png" alt="Campaign banner 1">
+                  </div>
+                  <div class="campaign-sp-slider-item">
+                    <img src="assets/img/banner.png" alt="Campaign banner 2">
+                  </div>
+                  <div class="campaign-sp-slider-item">
+                    <img src="assets/img/banner (1).png" alt="Campaign banner 3">
+                  </div>
+                </div>
+              </div>
+              <div class="campaign-controls-footer-sp">
+                <div class="carousel-footer-info">
+                  <span class="carousel-tag"># ギフト</span>
+                  <span class="carousel-tag">父の日ギフト 6/15まで</span>
+                </div>
+              </div>
+            </div>
+            <div class="thumnail-box">
+              <div class="campaign-sp-thumbnails">
+                <button class="campaign-sp-thumb-prev" aria-label="Previous thumbnail">
+                  <img src="./assets/img/sp-l.png" alt="">
+                </button>
+                
+                <div class="campaign-sp-thumb-wrap">
+                  <div class="campaign-sp-thumb-track">
+                    <div class="campaign-sp-thumb-item active" data-index="0">
+                      <img src="assets/img/RC_EC_banner_07 1.png" alt="Campaign thumbnail 1">
+                    </div>
+                    <div class="campaign-sp-thumb-item" data-index="1">
+                      <img src="assets/img/banner.png" alt="Campaign thumbnail 2">
+                    </div>
+                    <div class="campaign-sp-thumb-item" data-index="2">
+                      <img src="assets/img/banner (1).png" alt="Campaign thumbnail 3">
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="campaign-sp-thumb-next" aria-label="Next thumbnail">
+                  <img src="./assets/img/sp-r.png" alt="">
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
