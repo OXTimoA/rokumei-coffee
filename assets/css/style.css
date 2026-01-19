@@ -2642,6 +2642,7 @@
     transition: transform 0.3s ease;
     will-change: transform;
     cursor: grab;
+    overflow-x: scroll;
   }
 
   .campaign-sp-thumb-track:active {
