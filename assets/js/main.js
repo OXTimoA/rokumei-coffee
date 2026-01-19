@@ -344,6 +344,30 @@ document.addEventListener('DOMContentLoaded', function () {
     let isTransitioning = false;
     let autoScrollInterval;
 
+    // Clone thumbnails for infinite loop
+    // Get original thumbnails (first totalSlides items)
+    const originalThumbItems = Array.from(spThumbItems).slice(0, totalSlides);
+    const totalThumbItems = originalThumbItems.length;
+    let currentThumbTrackIndex = totalThumbItems; // Start at first original (after clones)
+
+    // Clone all thumbnails and append at end
+    originalThumbItems.forEach((item) => {
+      const clone = item.cloneNode(true);
+      clone.classList.remove('active');
+      spThumbTrack.appendChild(clone);
+    });
+
+    // Clone all thumbnails and prepend at start
+    for (let i = totalThumbItems - 1; i >= 0; i--) {
+      const clone = originalThumbItems[i].cloneNode(true);
+      clone.classList.remove('active');
+      spThumbTrack.insertBefore(clone, spThumbTrack.firstChild);
+    }
+
+    // Now structure is: [ClonesBefore(totalThumbItems), Originals(totalThumbItems), ClonesAfter(totalThumbItems)]
+    // Re-query all thumb items including clones
+    const allThumbItems = spThumbTrack.querySelectorAll('.campaign-sp-thumb-item');
+
     // Clone slides for infinite loop
     mainSlides.forEach((slide, index) => {
       if (index === 0) {
@@ -364,6 +388,52 @@ document.addEventListener('DOMContentLoaded', function () {
     spMainSlider.style.transition = 'none';
     spMainSlider.style.transform = `translateX(-${currentMainIndex * 100}%)`;
 
+    // Update thumbnail track position for infinite scroll
+    function updateThumbTrackPosition(withTransition = true) {
+      if (withTransition) {
+        spThumbTrack.style.transition = 'transform 0.3s ease';
+      } else {
+        spThumbTrack.style.transition = 'none';
+      }
+
+      const gap = 10; // gap between items (from CSS)
+      let thumbPosition = 0;
+      
+      // Calculate position based on currentThumbTrackIndex (includes clones)
+      // Make sure we have valid widths before calculating
+      if (allThumbItems.length > 0 && allThumbItems[0] && allThumbItems[0].offsetWidth > 0) {
+        for (let i = 0; i < currentThumbTrackIndex; i++) {
+          if (allThumbItems[i] && allThumbItems[i].offsetWidth > 0) {
+            thumbPosition += allThumbItems[i].offsetWidth + gap;
+          }
+        }
+        spThumbTrack.style.transform = `translateX(-${thumbPosition}px)`;
+      }
+    }
+
+    // Start with thumbnails visible (at position 0) until DOM is ready
+    spThumbTrack.style.transform = 'translateX(0)';
+    spThumbTrack.style.transition = 'none';
+    
+    // Set initial thumbnail track position after DOM is ready
+    // Use requestAnimationFrame to ensure layout is complete
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        updateThumbTrackPosition(false);
+      });
+    });
+    
+    // Set initial active thumbnail
+    if (originalThumbItems[0]) {
+      originalThumbItems[0].classList.add('active');
+    }
+    allThumbItems.forEach((item) => {
+      const dataIndex = parseInt(item.getAttribute('data-index'));
+      if (dataIndex === 0) {
+        item.classList.add('active');
+      }
+    });
+
     // Update main slider position
     function updateMainSlider(withTransition = true) {
       if (withTransition) {
@@ -374,12 +444,25 @@ document.addEventListener('DOMContentLoaded', function () {
       spMainSlider.style.transform = `translateX(-${currentMainIndex * 100}%)`;
     }
 
-    // Update active thumbnail
+    // Update active thumbnail and scroll to position it on the left
     function updateActiveThumbnail(index) {
-      spThumbItems.forEach((item, i) => {
+      // Update active class on original thumbnails only (for visual feedback)
+      originalThumbItems.forEach((item, i) => {
         item.classList.toggle('active', i === index);
       });
+      
+      // Also update clones for consistency
+      allThumbItems.forEach((item) => {
+        const dataIndex = parseInt(item.getAttribute('data-index'));
+        item.classList.toggle('active', dataIndex === index);
+      });
+      
       currentThumbIndex = index;
+      
+      // Update track position to show the selected thumbnail on the left
+      // Map logical index to track index (accounting for clones)
+      currentThumbTrackIndex = index + totalThumbItems; // +totalThumbItems because clones are prepended
+      updateThumbTrackPosition(true);
     }
 
     // Go to specific slide
@@ -405,9 +488,19 @@ document.addEventListener('DOMContentLoaded', function () {
       currentMainIndex++;
       updateMainSlider(true);
 
-      // Update thumbnail index
+      // Update thumbnail index and scroll
       currentThumbIndex = (currentThumbIndex + 1) % totalSlides;
-      updateActiveThumbnail(currentThumbIndex);
+      currentThumbTrackIndex++;
+      updateThumbTrackPosition(true);
+      
+      // Update active class
+      originalThumbItems.forEach((item, i) => {
+        item.classList.toggle('active', i === currentThumbIndex);
+      });
+      allThumbItems.forEach((item) => {
+        const dataIndex = parseInt(item.getAttribute('data-index'));
+        item.classList.toggle('active', dataIndex === currentThumbIndex);
+      });
     }
 
     // Previous slide
@@ -417,9 +510,19 @@ document.addEventListener('DOMContentLoaded', function () {
       currentMainIndex--;
       updateMainSlider(true);
 
-      // Update thumbnail index
+      // Update thumbnail index and scroll
       currentThumbIndex = (currentThumbIndex - 1 + totalSlides) % totalSlides;
-      updateActiveThumbnail(currentThumbIndex);
+      currentThumbTrackIndex--;
+      updateThumbTrackPosition(true);
+      
+      // Update active class
+      originalThumbItems.forEach((item, i) => {
+        item.classList.toggle('active', i === currentThumbIndex);
+      });
+      allThumbItems.forEach((item) => {
+        const dataIndex = parseInt(item.getAttribute('data-index'));
+        item.classList.toggle('active', dataIndex === currentThumbIndex);
+      });
     }
 
     // Handle transition end for infinite loop
@@ -462,26 +565,46 @@ document.addEventListener('DOMContentLoaded', function () {
       spSliderContainer.addEventListener('mouseleave', startAutoScroll);
     }
 
-    // Thumbnail click handlers
-    spThumbItems.forEach((thumb, index) => {
+    // Handle thumbnail track transition end for infinite loop
+    spThumbTrack.addEventListener('transitionend', () => {
+      // If we're at the clones at the end
+      if (currentThumbTrackIndex >= totalThumbItems * 2) {
+        spThumbTrack.style.transition = 'none';
+        currentThumbTrackIndex = currentThumbTrackIndex - totalThumbItems;
+        updateThumbTrackPosition(false);
+      }
+
+      // If we're at the clones at the beginning
+      if (currentThumbTrackIndex < totalThumbItems) {
+        spThumbTrack.style.transition = 'none';
+        currentThumbTrackIndex = currentThumbTrackIndex + totalThumbItems;
+        updateThumbTrackPosition(false);
+      }
+    });
+
+    // Thumbnail click handlers (works with all items including clones)
+    allThumbItems.forEach((thumb) => {
       thumb.addEventListener('click', () => {
-        goToSlide(index, true);
-        updateActiveThumbnail(index);
-        startAutoScroll(); // Restart auto-scroll
+        const dataIndex = parseInt(thumb.getAttribute('data-index'));
+        if (dataIndex !== null && !isNaN(dataIndex)) {
+          goToSlide(dataIndex, true);
+          updateActiveThumbnail(dataIndex);
+          startAutoScroll(); // Restart auto-scroll
+        }
       });
     });
 
     // Thumbnail navigation buttons
     if (spThumbPrev) {
       spThumbPrev.addEventListener('click', () => {
-        prevSlide();
+        prevSlide(); // This already updates both main slide and thumbnail track
         startAutoScroll();
       });
     }
 
     if (spThumbNext) {
       spThumbNext.addEventListener('click', () => {
-        nextSlide();
+        nextSlide(); // This already updates both main slide and thumbnail track
         startAutoScroll();
       });
     }
